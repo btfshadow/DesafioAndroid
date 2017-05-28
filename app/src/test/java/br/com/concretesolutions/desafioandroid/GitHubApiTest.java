@@ -43,11 +43,11 @@ public class GitHubApiTest {
     }
 
     private String requestSort() {
-        return "stars";
+        return searchRepos.request().url().queryParameterValue(1);
     }
 
     private String requestQuery() {
-        return "language:java";
+        return searchRepos.request().url().queryParameterValue(0);
     }
 
     private String requestUrl() {
