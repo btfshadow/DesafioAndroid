@@ -46,7 +46,7 @@ class GitHubApiTest {
     }
 
     @Test
-    fun whenSortForMostStars_sortShouldContain_stars() {
+    fun whenSortForMostStars_sortShouldBe_stars() {
         gitHubApi {
             sortBy(SortType.STARS)
         } build {
@@ -55,11 +55,20 @@ class GitHubApiTest {
     }
 
     @Test
-    fun whenSortForMostForked_sortShouldContain_forks() {
+    fun whenSortForMostForked_sortShouldBe_forks() {
         gitHubApi {
             sortBy(SortType.FORKS)
         } build {
             sortedBy("forks")
+        }
+    }
+
+    @Test
+    fun whenAskForFirstPage_pageShouldBe_0() {
+        gitHubApi {
+            page(0)
+        } build {
+            pageIs("0")
         }
     }
 }
