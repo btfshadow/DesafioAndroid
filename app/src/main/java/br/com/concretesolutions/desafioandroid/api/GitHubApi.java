@@ -1,5 +1,6 @@
 package br.com.concretesolutions.desafioandroid.api;
 
+import br.com.concretesolutions.desafioandroid.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,7 +17,7 @@ public class GitHubApi {
 
     private static GitHubService build() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
