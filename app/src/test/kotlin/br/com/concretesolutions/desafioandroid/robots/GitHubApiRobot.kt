@@ -1,8 +1,8 @@
 package br.com.concretesolutions.desafioandroid.robots
 
 import br.com.concretesolutions.desafioandroid.api.GitHubApi
-import br.com.concretesolutions.desafioandroid.api.LanguageType
-import br.com.concretesolutions.desafioandroid.api.SortType
+import br.com.concretesolutions.desafioandroid.api.types.LanguageType
+import br.com.concretesolutions.desafioandroid.api.types.SortType
 import br.com.concretesolutions.desafioandroid.model.Page
 import br.com.concretesolutions.desafioandroid.model.Repo
 import org.junit.Assert.assertEquals

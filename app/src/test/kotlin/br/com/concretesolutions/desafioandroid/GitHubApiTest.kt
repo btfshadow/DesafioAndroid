@@ -1,7 +1,7 @@
 package br.com.concretesolutions.desafioandroid
 
-import br.com.concretesolutions.desafioandroid.api.LanguageType
-import br.com.concretesolutions.desafioandroid.api.SortType
+import br.com.concretesolutions.desafioandroid.api.types.LanguageType
+import br.com.concretesolutions.desafioandroid.api.types.SortType
 import br.com.concretesolutions.desafioandroid.robots.gitHubApi
 import org.junit.Test
 import org.junit.runner.RunWith

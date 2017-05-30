@@ -5,9 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class Repo {
 
-    @Expose private String name;
+    @Expose
+    private String name;
+
+    @Expose
     @SerializedName("full_name")
-    @Expose private String fullName;
+    private String fullName;
 
     public String name() {
         return name;

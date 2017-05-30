@@ -34,6 +34,11 @@ android {
         abortOnError false
         warning 'InvalidPackage'
     }
+
+    sourceSets {
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
 }
 
 final versions = rootProject.ext
