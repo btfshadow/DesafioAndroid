@@ -1,36 +1,51 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "br.com.concretesolutions.desafioandroid"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    def baseUrl = '"https://api.github.com/"'
+
     buildTypes {
+        debug {
+            buildConfigField 'String', 'BASE_URL', baseUrl
+            debuggable true
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+
         release {
+            buildConfigField 'String', 'BASE_URL', baseUrl
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     lintOptions {
+        abortOnError false
         warning 'InvalidPackage'
     }
 }
 
+final versions = rootProject.ext
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$versions.constraintLayoutVersion"
 
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile("com.squareup.retrofit2:converter-gson:2.3.0") {
+    compile "com.google.code.gson:gson:$versions.gsonVersion"
+    compile "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    compile("com.squareup.retrofit2:converter-gson:$versions.retrofitVersion") {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
@@ -39,4 +54,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 }
