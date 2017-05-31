@@ -1,8 +1,8 @@
 package br.com.concretesolutions.desafioandroid.robots
 
 import br.com.concretesolutions.desafioandroid.api.GitHubApi
-import br.com.concretesolutions.desafioandroid.api.LanguageType
-import br.com.concretesolutions.desafioandroid.api.SortType
+import br.com.concretesolutions.desafioandroid.api.types.LanguageType
+import br.com.concretesolutions.desafioandroid.api.types.SortType
 import br.com.concretesolutions.desafioandroid.model.Page
 import br.com.concretesolutions.desafioandroid.model.Repo
 import org.junit.Assert.assertEquals
@@ -41,8 +41,9 @@ class GitHubApiRobot {
 
 class GitHubApiResult(private val searchRepos: Call<Page<Repo>>) {
 
-    private val sortIndex = 1
     private val languageIndex = 0
+    private val sortIndex = 1
+    private val pageIndex = 2
 
     fun baseUrlIs(baseUrl: String) {
         assertTrue("Url is incorrect", requestUrl().contains(baseUrl))
@@ -54,6 +55,14 @@ class GitHubApiResult(private val searchRepos: Call<Page<Repo>>) {
 
     fun sortedBy(sort: String) {
         assertEquals("Sort is incorrect", requestSort(), sort)
+    }
+
+    fun pageIs(page: String) {
+        assertEquals("Page is incorrect", requestPage(), page)
+    }
+
+    private fun requestPage(): String {
+        return searchRepos.request().url().queryParameterValue(pageIndex)
     }
 
     private fun requestSort(): String {
