@@ -1,14 +1,14 @@
-package br.com.concretesolutions.desafioandroid.robots
+package br.com.concretesolutions.repository.robots
 
 import br.com.concretesolutions.desafioandroid.api.GitHubApi
 import br.com.concretesolutions.desafioandroid.api.types.LanguageType
 import br.com.concretesolutions.desafioandroid.api.types.SortType
 import br.com.concretesolutions.desafioandroid.model.Page
 import br.com.concretesolutions.desafioandroid.model.Repo
-import br.com.concretesolutions.desafioandroid.utils.RequestUtils.languageParam
-import br.com.concretesolutions.desafioandroid.utils.RequestUtils.removeQueryFromUrl
-import br.com.concretesolutions.desafioandroid.utils.RequestUtils.requestEndpoint
-import br.com.concretesolutions.desafioandroid.utils.RequestUtils.sortParam
+import br.com.concretesolutions.repository.utils.RequestUtils.languageParam
+import br.com.concretesolutions.repository.utils.RequestUtils.removeQueryFromUrl
+import br.com.concretesolutions.repository.utils.RequestUtils.requestEndpoint
+import br.com.concretesolutions.repository.utils.RequestUtils.sortParam
 import org.junit.Assert.assertEquals
 import retrofit2.Call
 

@@ -9,6 +9,7 @@ import static br.com.concretesolutions.desafioandroid.api.types.LanguageType.JAV
 import static br.com.concretesolutions.desafioandroid.api.types.LanguageType.KOTLIN;
 import static br.com.concretesolutions.desafioandroid.api.types.LanguageType.PHP;
 
+
 @Retention(RetentionPolicy.CLASS)
 @StringDef({JAVA, KOTLIN, PHP})
 public @interface LanguageType {

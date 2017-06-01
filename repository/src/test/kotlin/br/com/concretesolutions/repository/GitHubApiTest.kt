@@ -1,14 +1,12 @@
-package br.com.concretesolutions.desafioandroid
+package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.desafioandroid.robots.gitHubApi
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import br.com.concretesolutions.repository.robots.gitHubApi
 
-@RunWith(JUnit4::class)
+
+@org.junit.runner.RunWith(org.junit.runners.JUnit4::class)
 class GitHubApiTest {
 
-    @Test
+    @org.junit.Test
     fun baseUrl_isCorrect() {
         gitHubApi {
         } build {
@@ -16,7 +14,7 @@ class GitHubApiTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenAskForPageX_pageParamShouldBe_X() {
         gitHubApi {
             page(1)
@@ -25,7 +23,7 @@ class GitHubApiTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun byDefault_pageShouldBe_0() {
         gitHubApi {
             page(0)

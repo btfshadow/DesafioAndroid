@@ -1,12 +1,10 @@
-package br.com.concretesolutions.desafioandroid.robots
+package br.com.concretesolutions.repository.robots
 
-import br.com.concretesolutions.desafioandroid.api.GitHubApi
 import br.com.concretesolutions.desafioandroid.model.Page
 import br.com.concretesolutions.desafioandroid.model.PullRequest
-import br.com.concretesolutions.desafioandroid.utils.RequestUtils.requestEndpoint
+import br.com.concretesolutions.repository.utils.RequestUtils.requestEndpoint
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import retrofit2.Call
 
 fun pullRequests(func: GetPullRequestsRobot.() -> Unit) = GetPullRequestsRobot().apply { func() }
 
@@ -16,7 +14,7 @@ class GetPullRequestsRobot {
     private var repository: String = ""
 
     infix fun get(func: GetPullRequestsResult.() -> Unit): GetPullRequestsResult {
-        val getPullRequests = GitHubApi.get().getPullRequests(creator, repository)
+        val getPullRequests = br.com.concretesolutions.desafioandroid.api.GitHubApi.get().getPullRequests(creator, repository)
         return GetPullRequestsResult(getPullRequests).apply { func() }
     }
 
@@ -31,7 +29,7 @@ class GetPullRequestsRobot {
     }
 }
 
-class GetPullRequestsResult(private val pullRequests: Call<Page<PullRequest>>) {
+class GetPullRequestsResult(private val pullRequests: retrofit2.Call<Page<PullRequest>>) {
     private val CREATOR_INDEX = 1
     private val REPOSITORY_INDEX = 2
 
