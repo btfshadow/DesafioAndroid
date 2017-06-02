@@ -1,6 +1,6 @@
 package br.com.concretesolutions.desafioandroid.api;
 
-import br.com.concretesolutions.desafioandroid.BuildConfig;
+import br.com.concretesolutions.repository.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

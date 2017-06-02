@@ -1,26 +1,27 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "br.com.concretesolutions.desafioandroid"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    def baseUrl = [debug  : '"https://api.github.com/"',
+                   release: '"https://api.github.com/"']
 
     buildTypes {
         debug {
+            buildConfigField 'String', 'BASE_URL', baseUrl.debug
             debuggable true
             minifyEnabled false
             testCoverageEnabled true
         }
 
         release {
+            buildConfigField 'String', 'BASE_URL', baseUrl.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -40,11 +41,9 @@ android {
 final versions = rootProject.ext
 
 dependencies {
-    compile project(':repository')
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
-    compile "com.android.support.constraint:constraint-layout:$versions.constraintLayoutVersion"
+
+    compile "com.android.support:support-annotations:$versions.supportLibraryVersion"
 
     compile "com.google.code.gson:gson:$versions.gsonVersion"
     compile "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
@@ -52,10 +51,6 @@ dependencies {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
-
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 }

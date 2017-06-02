@@ -1,14 +1,12 @@
-package br.com.concretesolutions.desafioandroid
+package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.desafioandroid.robots.pullRequests
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import br.com.concretesolutions.repository.robots.pullRequests
 
-@RunWith(JUnit4::class)
+
+@org.junit.runner.RunWith(org.junit.runners.JUnit4::class)
 class GetPullRequestsTest {
 
-    @Test
+    @org.junit.Test
     fun endpointIsCorrect() {
         pullRequests {
             creator("creator")
@@ -18,7 +16,7 @@ class GetPullRequestsTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenPassCreatorName_endpointSecondParameter_shouldBeCreator() {
         pullRequests {
             creator("creator")
@@ -28,7 +26,7 @@ class GetPullRequestsTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenPassRepositoryName_endpointThirdParameter_shouldBeRepository() {
         pullRequests {
             creator("creator")

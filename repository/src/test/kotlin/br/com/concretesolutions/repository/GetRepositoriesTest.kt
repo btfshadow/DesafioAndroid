@@ -1,16 +1,12 @@
-package br.com.concretesolutions.desafioandroid
+package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.desafioandroid.api.types.LanguageType
-import br.com.concretesolutions.desafioandroid.api.types.SortType
-import br.com.concretesolutions.desafioandroid.robots.repositories
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import br.com.concretesolutions.repository.robots.repositories
 
-@RunWith(JUnit4::class)
+
+@org.junit.runner.RunWith(org.junit.runners.JUnit4::class)
 class GetRepositoriesTest {
 
-    @Test
+    @org.junit.Test
     fun endpointIsCorrect() {
         repositories {
         } get {
@@ -18,52 +14,52 @@ class GetRepositoriesTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenLanguageIsJava_queryShouldContain_Java() {
         repositories {
-            languageIs(LanguageType.JAVA)
+            languageIs(br.com.concretesolutions.desafioandroid.api.types.LanguageType.JAVA)
         } get {
             languageIs("java")
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenLanguageIsKotlin_queryShouldContain_Kotlin() {
         repositories {
-            languageIs(LanguageType.KOTLIN)
+            languageIs(br.com.concretesolutions.desafioandroid.api.types.LanguageType.KOTLIN)
         } get {
             languageIs("kotlin")
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenLanguageIsPHP_queryShouldContain_PHP() {
         repositories {
-            languageIs(LanguageType.PHP)
+            languageIs(br.com.concretesolutions.desafioandroid.api.types.LanguageType.PHP)
         } get {
             languageIs("php")
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenSortForMostStars_sortShouldBe_stars() {
         repositories {
-            sortBy(SortType.STARS)
+            sortBy(br.com.concretesolutions.desafioandroid.api.types.SortType.STARS)
         } get {
             sortedBy("stars")
         }
     }
 
-    @Test
+    @org.junit.Test
     fun whenSortForMostForked_sortShouldBe_forks() {
         repositories {
-            sortBy(SortType.FORKS)
+            sortBy(br.com.concretesolutions.desafioandroid.api.types.SortType.FORKS)
         } get {
             sortedBy("forks")
         }
     }
 
-    @Test
+    @org.junit.Test
     fun byDefault_languageShouldBeJava() {
         repositories {
         } get {
@@ -71,7 +67,7 @@ class GetRepositoriesTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun byDefault_sortShouldBeStars() {
         repositories {
         } get {
