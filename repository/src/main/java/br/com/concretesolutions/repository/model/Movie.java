@@ -1,18 +1,20 @@
-package br.com.concretesolutions.desafioandroid.model;
+package br.com.concretesolutions.repository.model;
 
 import com.google.gson.annotations.Expose;
 
-public class PullRequest {
+public class Movie {
+
     @Expose
     private String title;
+
     @Expose
-    private String body;
+    private String overview;
 
     public String title() {
         return title;
     }
 
-    public String body() {
-        return body;
+    public String overview() {
+        return overview;
     }
 }
