@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface GitHubService {
 
     @GET("search/repositories")
-    Call<Page<Repo>> searchRepos(@Query("q") @LanguageType String language, @Query("sort") @SortType String sort, @Query("page") int page);
+    Call<Page<Repo>> getRepositories(@Query("q") @LanguageType String language, @Query("sort") @SortType String sort, @Query("page") int page);
 
     @GET("repos/{creator}/{repo}/pulls")
     Call<Page<PullRequest>> getPullRequests(@Path("creator") String ownerLogin, @Path("repo") String repositoryName);
