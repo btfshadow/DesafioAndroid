@@ -1,4 +1,4 @@
-package br.com.concretesolutions.repository.api.endpoints;
+package br.com.concretesolutions.repository.api.endpoint;
 
 public final class MovieEndpoints {
     private static final String BASE_PATH = "movie/";

@@ -1,11 +1,13 @@
 package br.com.concretesolutions.repository
 
+import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.robots.moviesApi
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 
-@RunWith(org.junit.runners.JUnit4::class)
+@RunWith(JUnit4::class)
 class MoviesApiTest {
 
     @Test
@@ -17,7 +19,7 @@ class MoviesApiTest {
     }
 
     @Test
-    fun whenAskForPageX_pageParamShouldBe_X() {
+    fun whenRequestPageX_pageParamShouldBe_X() {
         moviesApi {
             page(1)
         } build {
@@ -26,21 +28,11 @@ class MoviesApiTest {
     }
 
     @Test
-    fun byDefault_pageShouldBe_0() {
+    fun whenQueryRegionX_regionParamShouldBe_X() {
         moviesApi {
-            page(0)
-        } build {
-            pageIs("0")
-        }
-    }
-
-    @Test
-    fun byDefault_regionShouldBe_BR() {
-        moviesApi {
-
+            region(RegionType.BR)
         } build {
             regionIs("BR")
         }
     }
-
 }

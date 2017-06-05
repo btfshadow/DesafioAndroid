@@ -1,4 +1,4 @@
-package br.com.concretesolutions.repository.api.interceptors;
+package br.com.concretesolutions.repository.api.interceptor;
 
 import java.io.IOException;
 

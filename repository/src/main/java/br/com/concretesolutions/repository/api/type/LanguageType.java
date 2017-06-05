@@ -1,12 +1,12 @@
-package br.com.concretesolutions.repository.api.types;
+package br.com.concretesolutions.repository.api.type;
 
 import android.support.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static br.com.concretesolutions.repository.api.types.LanguageType.EN_US;
-import static br.com.concretesolutions.repository.api.types.LanguageType.PT_BR;
+import static br.com.concretesolutions.repository.api.type.LanguageType.EN_US;
+import static br.com.concretesolutions.repository.api.type.LanguageType.PT_BR;
 
 
 @Retention(RetentionPolicy.CLASS)

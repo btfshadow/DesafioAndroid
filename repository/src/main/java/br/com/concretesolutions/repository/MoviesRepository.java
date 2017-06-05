@@ -1,7 +1,7 @@
 package br.com.concretesolutions.repository;
 
 
-import br.com.concretesolutions.repository.api.types.RegionType;
+import br.com.concretesolutions.repository.api.type.RegionType;
 
 public class MoviesRepository {
 

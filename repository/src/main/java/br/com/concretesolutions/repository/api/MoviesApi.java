@@ -3,7 +3,7 @@ package br.com.concretesolutions.repository.api;
 import android.support.annotation.NonNull;
 
 import br.com.concretesolutions.repository.BuildConfig;
-import br.com.concretesolutions.repository.api.interceptors.RequestInterceptor;
+import br.com.concretesolutions.repository.api.interceptor.RequestInterceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
