@@ -18,6 +18,12 @@ android {
             minifyEnabled false
             testCoverageEnabled true
         }
+
+        release {
+            buildConfigField 'String', 'BASE_URL', baseUrl
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 
     lintOptions {
