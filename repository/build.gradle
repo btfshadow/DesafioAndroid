@@ -14,15 +14,11 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', 'BASE_URL', baseUrl
-            debuggable true
-            minifyEnabled false
-            testCoverageEnabled true
+            testCoverageEnabled false
         }
 
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
