@@ -1,26 +1,26 @@
-package br.com.concretesolutions.desafioandroid.api;
+package br.com.concretesolutions.repository.api;
 
-import br.com.concretesolutions.desafioandroid.BuildConfig;
+import br.com.concretesolutions.repository.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GitHubApi {
+public class MoviesApi {
 
-    private static GitHubService INSTANCE;
+    private static MoviesService INSTANCE;
 
-    public static GitHubService get() {
+    public static MoviesService get() {
         if (INSTANCE == null) {
             INSTANCE = build();
         }
         return INSTANCE;
     }
 
-    private static GitHubService build() {
+    private static MoviesService build() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        return retrofit.create(GitHubService.class);
+        return retrofit.create(MoviesService.class);
     }
 }
