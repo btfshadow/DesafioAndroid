@@ -4,7 +4,8 @@ import okhttp3.Request
 
 object RequestUtils {
 
-    private val pageIndex = 1
+    private val pageIndex = 2
+    private val regionIndex = 0
 
     fun requestEndpoint(request: Request): String {
         val baseUrlSize = BuildConfig.BASE_URL.length
@@ -18,5 +19,9 @@ object RequestUtils {
     fun requestBaseUrl(request: Request): String {
         val urlSize = BuildConfig.BASE_URL.length
         return request.url().toString().substring(0, urlSize)
+    }
+
+    fun regionParam(request: Request): String {
+        return request.url().queryParameterValue(regionIndex)
     }
 }

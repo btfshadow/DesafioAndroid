@@ -1,6 +1,6 @@
 package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.repository.robots.gitHubApi
+import br.com.concretesolutions.repository.robots.moviesApi
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -10,7 +10,7 @@ class MoviesApiTest {
 
     @Test
     fun baseUrl_isCorrect() {
-        gitHubApi {
+        moviesApi {
         } build {
            baseUrlIs(BuildConfig.BASE_URL)
         }
@@ -18,7 +18,7 @@ class MoviesApiTest {
 
     @Test
     fun whenAskForPageX_pageParamShouldBe_X() {
-        gitHubApi {
+        moviesApi {
             page(1)
         } build {
             pageIs("1")
@@ -27,10 +27,19 @@ class MoviesApiTest {
 
     @Test
     fun byDefault_pageShouldBe_0() {
-        gitHubApi {
+        moviesApi {
             page(0)
         } build {
             pageIs("0")
+        }
+    }
+
+    @Test
+    fun byDefault_regionShouldBe_BR() {
+        moviesApi {
+
+        } build {
+            regionIs("BR")
         }
     }
 
