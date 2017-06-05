@@ -9,21 +9,16 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
     }
 
-    def baseUrl = [debug  : '"https://api.github.com/"',
-                   release: '"https://api.github.com/"']
+    def baseUrl = '"https://api.themoviedb.org/3/"'
 
     buildTypes {
         debug {
-            buildConfigField 'String', 'BASE_URL', baseUrl.debug
-            debuggable true
-            minifyEnabled false
-            testCoverageEnabled true
+            buildConfigField 'String', 'BASE_URL', baseUrl
+            testCoverageEnabled false
         }
 
         release {
-            buildConfigField 'String', 'BASE_URL', baseUrl.release
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', baseUrl
         }
     }
 
