@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,15 +11,18 @@ android {
     }
 
     def baseUrl = '"https://api.themoviedb.org/3/"'
+    def apiKey = '"1cef6bd1d5e66557f3e1156e8f42109b"'
 
     buildTypes {
         debug {
             buildConfigField 'String', 'BASE_URL', baseUrl
+            buildConfigField 'String', 'API_KEY', apiKey
             testCoverageEnabled false
         }
 
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
+            buildConfigField 'String', 'API_KEY', apiKey
         }
     }
 
@@ -31,6 +35,10 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 final versions = rootProject.ext
@@ -41,11 +49,20 @@ dependencies {
     compile "com.android.support:support-annotations:$versions.supportLibraryVersion"
 
     compile "com.google.code.gson:gson:$versions.gsonVersion"
+
     compile "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
     compile("com.squareup.retrofit2:converter-gson:$versions.retrofitVersion") {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
+
+    compile "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    compile("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
+        exclude module: 'okhttp'
+    }
+
+    compile "com.jakewharton.timber:timber:$versions.timber"
+
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 }

@@ -1,24 +1,26 @@
 package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.repository.robots.gitHubApi
+import br.com.concretesolutions.repository.api.type.RegionType
+import br.com.concretesolutions.repository.robots.moviesApi
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 
-@RunWith(org.junit.runners.JUnit4::class)
+@RunWith(JUnit4::class)
 class MoviesApiTest {
 
     @Test
     fun baseUrl_isCorrect() {
-        gitHubApi {
+        moviesApi {
         } build {
            baseUrlIs(BuildConfig.BASE_URL)
         }
     }
 
     @Test
-    fun whenAskForPageX_pageParamShouldBe_X() {
-        gitHubApi {
+    fun whenRequestPageX_pageParamShouldBe_X() {
+        moviesApi {
             page(1)
         } build {
             pageIs("1")
@@ -26,12 +28,11 @@ class MoviesApiTest {
     }
 
     @Test
-    fun byDefault_pageShouldBe_0() {
-        gitHubApi {
-            page(0)
+    fun whenQueryRegionX_regionParamShouldBe_X() {
+        moviesApi {
+            region(RegionType.BR)
         } build {
-            pageIs("0")
+            regionIs("BR")
         }
     }
-
 }
