@@ -1,12 +1,11 @@
 package br.com.concretesolutions.repository.robots
 
 import br.com.concretesolutions.repository.api.MoviesApi
-import br.com.concretesolutions.repository.api.type.RegionType
+import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.model.TVShow
 import br.com.concretesolutions.repository.utils.errorString
 import br.com.concretesolutions.repository.utils.pageParam
-import br.com.concretesolutions.repository.utils.regionParam
 import br.com.concretesolutions.repository.utils.requestBaseUrl
 import org.junit.Assert.assertEquals
 import retrofit2.Call
@@ -15,7 +14,6 @@ fun moviesApi(func: MoviesApiRobot.() -> Unit) = MoviesApiRobot().apply { func()
 
 class MoviesApiRobot {
 
-    @RegionType private var region = RegionType.BR
     private var page: Int = 0
 
     fun page(page: Int): MoviesApiRobot {
@@ -23,13 +21,8 @@ class MoviesApiRobot {
         return this
     }
 
-    fun region(@RegionType region: String): MoviesApiRobot {
-        this.region = region
-        return this
-    }
-
     infix fun build(func: MoviesApiResult.() -> Unit): MoviesApiResult {
-        val repositories = MoviesApi.get().getPopular(region, page)
+        val repositories = MoviesApi.get().getPopular(LanguageType.PT_BR, page)
         return MoviesApiResult(repositories).apply { func() }
     }
 
@@ -45,8 +38,5 @@ class MoviesApiResult(private val repositories: Call<Page<TVShow>>) {
         assertEquals(errorString("Page"), pageParam(repositories.request()), page)
     }
 
-    fun regionIs(region: String) {
-        assertEquals(errorString("Region"), regionParam(repositories.request()), region)
-    }
 }
 

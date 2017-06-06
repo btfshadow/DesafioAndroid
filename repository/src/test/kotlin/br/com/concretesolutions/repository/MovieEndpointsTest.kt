@@ -1,6 +1,7 @@
 package br.com.concretesolutions.repository
 
 import br.com.concretesolutions.repository.api.type.LanguageType
+import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.robots.movieEndpoints
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +24,15 @@ class MovieEndpointsTest {
             language(LanguageType.EN_US)
         } build {
             languageIs("en-US")
+        }
+    }
+
+    @Test
+    fun whenQueryRegionX_regionParamShouldBe_X() {
+        movieEndpoints {
+            region(RegionType.BR)
+        } build {
+            regionIs("BR")
         }
     }
 

@@ -3,9 +3,9 @@ package br.com.concretesolutions.repository.utils
 import br.com.concretesolutions.repository.BuildConfig
 import okhttp3.Request
 
+private val languageIndex = 0
 private val pageIndex = 1
-private val regionIndex = 0
-private val languageIndex = 1
+private val regionIndex = 2
 
 fun requestEndpoint(request: Request): String {
     val baseUrlSize = BuildConfig.BASE_URL.length
