@@ -1,6 +1,5 @@
 package br.com.concretesolutions.repository
 
-import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.robots.moviesApi
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,12 +26,4 @@ class MoviesApiTest {
         }
     }
 
-    @Test
-    fun whenQueryRegionX_regionParamShouldBe_X() {
-        moviesApi {
-            region(RegionType.BR)
-        } build {
-            regionIs("BR")
-        }
-    }
 }

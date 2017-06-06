@@ -7,6 +7,7 @@ import br.com.concretesolutions.repository.model.Movie
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.utils.errorString
 import br.com.concretesolutions.repository.utils.languageParam
+import br.com.concretesolutions.repository.utils.regionParam
 import br.com.concretesolutions.repository.utils.requestEndpoint
 import org.junit.Assert
 import retrofit2.Call
@@ -20,23 +21,32 @@ class MoviesEndpointsRobot {
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val repositories = MoviesApi.get().getPopular(region, lang, page)
-        return MoviesEndpointsResult(repositories).apply { func() }
+        val movies = MoviesApi.get().getPopular(lang, page, region)
+        return MoviesEndpointsResult(movies).apply { func() }
     }
 
-    fun language(language: String): MoviesEndpointsRobot {
+    fun language(@LanguageType language: String): MoviesEndpointsRobot {
         this.lang = language
+        return this
+    }
+
+    fun region(@RegionType region: String): MoviesEndpointsRobot {
+        this.region = region
         return this
     }
 }
 
-class MoviesEndpointsResult(private val repositories: Call<Page<Movie>>) {
+class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
     fun languageIs(language: String) {
-        Assert.assertEquals(errorString("Language"), languageParam(repositories.request()), language)
+        Assert.assertEquals(errorString("Language"), languageParam(movies.request()), language)
+    }
+
+    fun regionIs(region: String) {
+        Assert.assertEquals(errorString("Region"), regionParam(movies.request()), region)
     }
 
     fun endpointIs(endpoint: String) {
-        Assert.assertTrue(errorString("Endpoint"), requestEndpoint(repositories.request()).contains(endpoint))
+        Assert.assertTrue(errorString("Endpoint"), requestEndpoint(movies.request()).contains(endpoint))
     }
 }
 
