@@ -38,12 +38,10 @@ public final class MoviesRepository {
                 .enqueue(new Callback<Page<Movie>>() {
                     @Override
                     public void onResponse(@NonNull Call<Page<Movie>> call, @NonNull Response<Page<Movie>> response) {
-
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<Page<Movie>> call, @NonNull Throwable t) {
-
                     }
                 });
     }
