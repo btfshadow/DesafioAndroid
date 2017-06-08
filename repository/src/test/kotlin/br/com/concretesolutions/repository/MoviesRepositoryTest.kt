@@ -15,5 +15,37 @@ class MoviesRepositoryTest {
             nowPlayingRequested()
         }
     }
+
+    @Test fun popular_shouldRequestPopularMovies() {
+        moviesRepository {
+            popular()
+        } request {
+            popularRequested()
+        }
+    }
+
+    @Test fun latest_shouldRequestLatestMovie() {
+        moviesRepository {
+            latest()
+        } request {
+            latestRequested()
+        }
+    }
+
+    @Test fun topRated_shouldRequestTopRatedMovies() {
+        moviesRepository {
+            topRated()
+        } request {
+            topRatedRequested()
+        }
+    }
+
+    @Test fun upComing_shouldRequestUpComingMovies() {
+        moviesRepository {
+            upComing()
+        } request {
+            upComingRequested()
+        }
+    }
 }
 
