@@ -1,6 +1,6 @@
 package br.com.concretesolutions.repository.api
 
-object MoviesApiInstance {
+object MoviesApiMock {
 
     fun instance(instance: MoviesService) {
         MoviesApi.INSTANCE = instance

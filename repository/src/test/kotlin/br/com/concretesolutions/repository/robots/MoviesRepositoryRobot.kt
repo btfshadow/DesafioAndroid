@@ -3,7 +3,7 @@ package br.com.concretesolutions.repository.robots
 import br.com.concretesolutions.repository.MoviesRepository
 import br.com.concretesolutions.repository.api.ApiBuilder
 import br.com.concretesolutions.repository.api.MoviesApi.okHttpClient
-import br.com.concretesolutions.repository.api.MoviesApiInstance.instance
+import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.api.MoviesService
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
@@ -30,7 +30,7 @@ class MoviesRepositoryRobot {
                 .okHttpClient(okHttpClient())
                 .service(MoviesService::class.java)
                 .build()
-        instance(moviesApi)
+        MoviesApiMock.instance(moviesApi)
     }
 
     @RegionType private var region = RegionType.BR
