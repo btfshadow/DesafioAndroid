@@ -4,7 +4,7 @@ import br.com.concretesolutions.repository.api.MoviesApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.model.TVShow
-import br.com.concretesolutions.repository.utils.errorString
+import br.com.concretesolutions.repository.utils.errorMessage
 import br.com.concretesolutions.repository.utils.languageParam
 import br.com.concretesolutions.repository.utils.requestEndpoint
 import org.junit.Assert.assertEquals
@@ -31,10 +31,10 @@ class TVShowEndpointsRobot {
 class TVShowEndpointsResult(private val tvShows: Call<Page<TVShow>>) {
 
     fun endpointIs(endpoint: String) {
-        assertTrue(errorString("Endpoint"), requestEndpoint(tvShows.request()).contains(endpoint))
+        assertTrue(errorMessage("Endpoint"), requestEndpoint(tvShows.request()).contains(endpoint))
     }
 
     fun languageIs(language: String) {
-        assertEquals(errorString("Language"), languageParam(tvShows.request()), language)
+        assertEquals(errorMessage("Language"), languageParam(tvShows.request()), language)
     }
 }

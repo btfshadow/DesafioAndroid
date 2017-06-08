@@ -1,4 +1,4 @@
 package br.com.concretesolutions.repository.utils
 
-fun errorString(param: String) = param + " is not correct"
+fun errorMessage(param: String) = param + " is not correct"
 

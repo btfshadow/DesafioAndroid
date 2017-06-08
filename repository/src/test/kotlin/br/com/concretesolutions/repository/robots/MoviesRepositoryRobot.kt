@@ -9,7 +9,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.request.BaseRequest.Code.SUCCESS
 import br.com.concretesolutions.repository.request.request
-import br.com.concretesolutions.repository.utils.errorString
+import br.com.concretesolutions.repository.utils.errorMessage
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
 import retrofit2.converter.gson.GsonConverterFactory
@@ -56,7 +56,7 @@ class MoviesRepositoryResult(private val server: MockWebServer) {
 
     fun nowPlayingRequested() {
         val request = server.takeRequest()
-        assertEquals(errorString("Path"), requestedEndpoint(request.path), "/movie/now_playing")
+        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/movie/now_playing")
         server.shutdown()
     }
 

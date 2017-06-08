@@ -4,7 +4,7 @@ import br.com.concretesolutions.repository.api.MoviesApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.model.TVShow
-import br.com.concretesolutions.repository.utils.errorString
+import br.com.concretesolutions.repository.utils.errorMessage
 import br.com.concretesolutions.repository.utils.pageParam
 import br.com.concretesolutions.repository.utils.requestBaseUrl
 import org.junit.Assert.assertEquals
@@ -31,11 +31,11 @@ class MoviesApiRobot {
 class MoviesApiResult(private val repositories: Call<Page<TVShow>>) {
 
     fun baseUrlIs(baseUrl: String) {
-        assertEquals(errorString("Url"), requestBaseUrl(repositories.request()), baseUrl)
+        assertEquals(errorMessage("Url"), requestBaseUrl(repositories.request()), baseUrl)
     }
 
     fun pageIs(page: String) {
-        assertEquals(errorString("Page"), pageParam(repositories.request()), page)
+        assertEquals(errorMessage("Page"), pageParam(repositories.request()), page)
     }
 
 }

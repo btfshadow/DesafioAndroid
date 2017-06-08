@@ -5,7 +5,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.model.Movie
 import br.com.concretesolutions.repository.model.Page
-import br.com.concretesolutions.repository.utils.errorString
+import br.com.concretesolutions.repository.utils.errorMessage
 import br.com.concretesolutions.repository.utils.languageParam
 import br.com.concretesolutions.repository.utils.regionParam
 import br.com.concretesolutions.repository.utils.requestEndpoint
@@ -38,15 +38,15 @@ class MoviesEndpointsRobot {
 
 class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
     fun languageIs(language: String) {
-        Assert.assertEquals(errorString("Language"), languageParam(movies.request()), language)
+        Assert.assertEquals(errorMessage("Language"), languageParam(movies.request()), language)
     }
 
     fun regionIs(region: String) {
-        Assert.assertEquals(errorString("Region"), regionParam(movies.request()), region)
+        Assert.assertEquals(errorMessage("Region"), regionParam(movies.request()), region)
     }
 
     fun endpointIs(endpoint: String) {
-        Assert.assertTrue(errorString("Endpoint"), requestEndpoint(movies.request()).contains(endpoint))
+        Assert.assertTrue(errorMessage("Endpoint"), requestEndpoint(movies.request()).contains(endpoint))
     }
 }
 
