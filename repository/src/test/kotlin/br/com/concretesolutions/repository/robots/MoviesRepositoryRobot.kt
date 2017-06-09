@@ -4,8 +4,8 @@ import br.com.concretesolutions.repository.MoviesRepository
 import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
-import br.com.concretesolutions.repository.request.BaseRequest.Code.SUCCESS
-import br.com.concretesolutions.repository.request.request
+import br.com.concretesolutions.repository.mock.request.RequestMock.Code.SUCCESS
+import br.com.concretesolutions.repository.mock.request.mockRequest
 import br.com.concretesolutions.repository.utils.errorMessage
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
@@ -24,7 +24,7 @@ class MoviesRepositoryRobot {
     @LanguageType private var lang = LanguageType.PT_BR
 
     internal fun nowPlaying() {
-        request(server) {
+        mockRequest(server) {
             movies {
                 nowPlaying(SUCCESS)
             }
@@ -32,7 +32,7 @@ class MoviesRepositoryRobot {
     }
 
     internal fun popular() {
-        request(server) {
+        mockRequest(server) {
             movies {
                 popular(SUCCESS)
             }

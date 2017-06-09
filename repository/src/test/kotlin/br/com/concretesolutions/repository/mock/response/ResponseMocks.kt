@@ -1,8 +1,8 @@
-package br.com.concretesolutions.repository.request
+package br.com.concretesolutions.repository.mock.response
 
-class RequestMocks {
+class ResponseMocks {
 
-    object MovieMocks {
+    object MovieResponseMocks {
 
         val popular_200 = "{\n" +
             "  \"page\": 1,\n" +

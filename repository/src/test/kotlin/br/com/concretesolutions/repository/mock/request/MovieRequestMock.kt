@@ -1,24 +1,25 @@
-package br.com.concretesolutions.repository.request
+package br.com.concretesolutions.repository.mock.request
 
-import br.com.concretesolutions.repository.request.BaseRequest.Code
-import br.com.concretesolutions.repository.request.BaseRequest.Code.*
+import br.com.concretesolutions.repository.mock.request.RequestMock.Code
+import br.com.concretesolutions.repository.mock.request.RequestMock.Code.*
+import br.com.concretesolutions.repository.mock.response.ResponseMocks
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 
-class MovieRequest(private val server: MockWebServer) {
+class MovieRequestMock(private val server: MockWebServer) {
 
     fun nowPlaying(code: Code) {
         when (code) {
             SUCCESS -> {
                 server.enqueue(MockResponse()
                         .setResponseCode(200)
-                        .setBody(RequestMocks.MovieMocks.nowPlaying_200))
+                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
             }
 
             ERROR -> {
                 server.enqueue(MockResponse()
                         .setResponseCode(400)
-                        .setBody(RequestMocks.MovieMocks.nowPlaying_200))
+                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
             }
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
@@ -30,13 +31,13 @@ class MovieRequest(private val server: MockWebServer) {
             SUCCESS -> {
                 server.enqueue(MockResponse()
                         .setResponseCode(200)
-                        .setBody(RequestMocks.MovieMocks.popular_200))
+                        .setBody(ResponseMocks.MovieResponseMocks.popular_200))
             }
 
             ERROR -> {
                 server.enqueue(MockResponse()
                         .setResponseCode(400)
-                        .setBody(RequestMocks.MovieMocks.nowPlaying_200))
+                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
             }
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
