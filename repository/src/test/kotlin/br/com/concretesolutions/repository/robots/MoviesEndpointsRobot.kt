@@ -46,7 +46,7 @@ class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
     }
 
     fun endpointIs(endpoint: String) {
-        Assert.assertTrue(errorMessage("Endpoint"), requestEndpoint(movies.request()).contains(endpoint))
+        Assert.assertEquals(errorMessage("Endpoint"), requestEndpoint(movies.request()), endpoint)
     }
 }
 

@@ -13,7 +13,7 @@ class TVShowEndpointsTest {
     fun endpointShouldBeTVShow() {
         tvShowEndpoints {
         } build {
-            endpointIs("tv/")
+            endpointIs("tv")
         }
     }
 
