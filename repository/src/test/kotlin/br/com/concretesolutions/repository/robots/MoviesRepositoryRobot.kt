@@ -12,14 +12,12 @@ import br.com.concretesolutions.repository.utils.errorMessage
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
 
-internal fun moviesRepository(func: MoviesRepositoryRobot.() -> Unit) = MoviesRepositoryRobot().apply { func() }
+internal fun moviesRepository(server: MockWebServer, func: MoviesRepositoryRobot.() -> Unit): MoviesRepositoryRobot {
+    MoviesApiMock.mock(server)
+    return MoviesRepositoryRobot(server).apply { func() }
+}
 
-class MoviesRepositoryRobot {
-    private val server = MockWebServer()
-    init {
-        server.start()
-        MoviesApiMock.mock(server)
-    }
+class MoviesRepositoryRobot(private val server: MockWebServer) {
 
     //region  Variables
     @RegionType private var region = RegionType.BR
@@ -119,7 +117,6 @@ class MoviesRepositoryResult(private val server: MockWebServer) {
     private fun pathIsCorrect(path: String) {
         val request = server.takeRequest()
         assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/$path")
-        server.shutdown()
     }
 
     private fun requestedEndpoint(fullPath: String): String {

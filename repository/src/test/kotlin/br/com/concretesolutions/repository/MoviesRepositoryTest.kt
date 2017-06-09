@@ -1,6 +1,9 @@
 package br.com.concretesolutions.repository
 
 import br.com.concretesolutions.repository.robots.moviesRepository
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -9,7 +12,7 @@ import org.junit.runners.JUnit4
 class MoviesRepositoryTest {
 
     @Test fun nowPlaying_shouldRequestNowPlayingMovies() {
-        moviesRepository {
+        moviesRepository(server) {
             nowPlaying()
         } request {
             nowPlayingRequested()
@@ -17,7 +20,7 @@ class MoviesRepositoryTest {
     }
 
     @Test fun popular_shouldRequestPopularMovies() {
-        moviesRepository {
+        moviesRepository(server) {
             popular()
         } request {
             popularRequested()
@@ -25,7 +28,7 @@ class MoviesRepositoryTest {
     }
 
     @Test fun latest_shouldRequestLatestMovie() {
-        moviesRepository {
+        moviesRepository(server) {
             latest()
         } request {
             latestRequested()
@@ -33,7 +36,7 @@ class MoviesRepositoryTest {
     }
 
     @Test fun topRated_shouldRequestTopRatedMovies() {
-        moviesRepository {
+        moviesRepository(server) {
             topRated()
         } request {
             topRatedRequested()
@@ -41,11 +44,25 @@ class MoviesRepositoryTest {
     }
 
     @Test fun upComing_shouldRequestUpComingMovies() {
-        moviesRepository {
+        moviesRepository(server) {
             upComing()
         } request {
             upComingRequested()
         }
     }
+
+    // region Initialization
+    private val server = MockWebServer()
+
+    @Before
+    fun setUp() {
+        server.start()
+    }
+
+    @After
+    fun tearDown() {
+        server.shutdown()
+    }
+    // endregion
 }
 
