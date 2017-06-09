@@ -14,6 +14,10 @@ android {
     def apiKey = '"1cef6bd1d5e66557f3e1156e8f42109b"'
 
     buildTypes {
+        debug {
+            buildConfigField 'String', 'BASE_URL', baseUrl
+            buildConfigField 'String', 'API_KEY', apiKey
+        }
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey

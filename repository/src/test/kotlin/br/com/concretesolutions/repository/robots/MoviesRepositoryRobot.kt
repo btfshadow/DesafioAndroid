@@ -2,6 +2,7 @@ package br.com.concretesolutions.repository.robots
 
 import br.com.concretesolutions.repository.MoviesRepository
 import br.com.concretesolutions.repository.api.MoviesApiMock
+import br.com.concretesolutions.repository.api.endpoint.MovieEndpoints.*
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.request.RequestMock.Code.SUCCESS
@@ -53,7 +54,7 @@ class MoviesRepositoryRobot {
         }
     }
 
-    internal fun latest() {
+    fun latest() {
         requestedEndpoint = LATEST
         mockRequest(server) {
             movies {
@@ -62,7 +63,7 @@ class MoviesRepositoryRobot {
         }
     }
 
-    internal fun topRated() {
+    fun topRated() {
         requestedEndpoint = TOP_RATED
         mockRequest(server) {
             movies {
@@ -71,7 +72,7 @@ class MoviesRepositoryRobot {
         }
     }
 
-    internal fun upComing() {
+    fun upComing() {
         requestedEndpoint = UP_COMING
         mockRequest(server) {
             movies {
@@ -80,7 +81,7 @@ class MoviesRepositoryRobot {
         }
     }
 
-    internal infix fun request(func: MoviesRepositoryResult.() -> Unit): MoviesRepositoryResult {
+    infix fun request(func: MoviesRepositoryResult.() -> Unit): MoviesRepositoryResult {
         when (requestedEndpoint) {
             NOW_PLAYING -> MoviesRepository.nowPlaying(lang, page, region)
             POPULAR -> MoviesRepository.popular(lang, page, region)
@@ -95,29 +96,29 @@ class MoviesRepositoryRobot {
 
 class MoviesRepositoryResult(private val server: MockWebServer) {
 
-    internal fun nowPlayingRequested() {
-        pathIsCorrect("now_playing")
+    fun nowPlayingRequested() {
+        pathIsCorrect(nowPlaying)
     }
 
-    internal fun popularRequested() {
-        pathIsCorrect("popular")
+    fun popularRequested() {
+        pathIsCorrect(popular)
     }
 
-    internal fun latestRequested() {
-        pathIsCorrect("latest")
+    fun latestRequested() {
+        pathIsCorrect(latest)
     }
 
-    internal fun topRatedRequested() {
-        pathIsCorrect("top_rated")
+    fun topRatedRequested() {
+        pathIsCorrect(topRated)
     }
 
-    internal fun upComingRequested() {
-        pathIsCorrect("upcoming")
+    fun upComingRequested() {
+        pathIsCorrect(upcoming)
     }
 
     private fun pathIsCorrect(path: String) {
         val request = server.takeRequest()
-        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/movie/"+path)
+        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/$path")
         server.shutdown()
     }
 
