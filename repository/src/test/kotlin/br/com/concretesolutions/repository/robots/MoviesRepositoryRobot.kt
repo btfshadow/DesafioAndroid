@@ -6,6 +6,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.request.RequestMock.Code.SUCCESS
 import br.com.concretesolutions.repository.mock.request.mockRequest
+import br.com.concretesolutions.repository.robots.MoviesRepositoryRobot.RequestedEndpoint.*
 import br.com.concretesolutions.repository.utils.errorMessage
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
@@ -19,11 +20,23 @@ class MoviesRepositoryRobot {
         MoviesApiMock.mock(server)
     }
 
+    //region  Variables
     @RegionType private var region = RegionType.BR
     private var page: Int = 1
     @LanguageType private var lang = LanguageType.PT_BR
+    enum class RequestedEndpoint(val endpointCode: Int) {
+        NOW_PLAYING(0),
+        LATEST(1),
+        POPULAR(2),
+        TOP_RATED(3),
+        UP_COMING(4)
+    }
+
+    var requestedEndpoint: RequestedEndpoint = NOW_PLAYING
+    //endregion
 
     internal fun nowPlaying() {
+        requestedEndpoint = NOW_PLAYING
         mockRequest(server) {
             movies {
                 nowPlaying(SUCCESS)
@@ -32,6 +45,7 @@ class MoviesRepositoryRobot {
     }
 
     internal fun popular() {
+        requestedEndpoint = POPULAR
         mockRequest(server) {
             movies {
                 popular(SUCCESS)
@@ -40,19 +54,40 @@ class MoviesRepositoryRobot {
     }
 
     internal fun latest() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        requestedEndpoint = LATEST
+        mockRequest(server) {
+            movies {
+                latest(SUCCESS)
+            }
+        }
     }
 
     internal fun topRated() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        requestedEndpoint = TOP_RATED
+        mockRequest(server) {
+            movies {
+                topRated(SUCCESS)
+            }
+        }
     }
 
     internal fun upComing() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        requestedEndpoint = UP_COMING
+        mockRequest(server) {
+            movies {
+                upComing(SUCCESS)
+            }
+        }
     }
 
     internal infix fun request(func: MoviesRepositoryResult.() -> Unit): MoviesRepositoryResult {
-        MoviesRepository.nowPlaying(lang, page, region)
+        when (requestedEndpoint) {
+            NOW_PLAYING -> MoviesRepository.nowPlaying(lang, page, region)
+            POPULAR -> MoviesRepository.popular(lang, page, region)
+            LATEST -> MoviesRepository.latest(lang, page, region)
+            TOP_RATED -> MoviesRepository.topRated(lang, page, region)
+            UP_COMING -> MoviesRepository.upComing(lang, page, region)
+        }
         return MoviesRepositoryResult(server).apply { func() }
     }
 
@@ -60,30 +95,34 @@ class MoviesRepositoryRobot {
 
 class MoviesRepositoryResult(private val server: MockWebServer) {
 
-    fun nowPlayingRequested() {
+    internal fun nowPlayingRequested() {
+        pathIsCorrect("now_playing")
+    }
+
+    internal fun popularRequested() {
+        pathIsCorrect("popular")
+    }
+
+    internal fun latestRequested() {
+        pathIsCorrect("latest")
+    }
+
+    internal fun topRatedRequested() {
+        pathIsCorrect("top_rated")
+    }
+
+    internal fun upComingRequested() {
+        pathIsCorrect("upcoming")
+    }
+
+    private fun pathIsCorrect(path: String) {
         val request = server.takeRequest()
-        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/movie/now_playing")
+        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/movie/"+path)
         server.shutdown()
     }
 
     private fun requestedEndpoint(fullPath: String): String {
         val queryStartIndex = fullPath.indexOf("?")
         return fullPath.substring(0, queryStartIndex)
-    }
-
-    fun popularRequested() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    fun latestRequested() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    fun topRatedRequested() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    fun upComingRequested() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

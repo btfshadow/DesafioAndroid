@@ -8,40 +8,60 @@ import okhttp3.mockwebserver.MockWebServer
 
 class MovieRequestMock(private val server: MockWebServer) {
 
-    fun nowPlaying(code: Code) {
+    internal fun nowPlaying(code: Code) {
         when (code) {
-            SUCCESS -> {
-                server.enqueue(MockResponse()
-                        .setResponseCode(200)
-                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
-            }
-
-            ERROR -> {
-                server.enqueue(MockResponse()
-                        .setResponseCode(400)
-                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
-            }
+            SUCCESS -> successMovieList()
+            ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    fun popular(code: Code) {
+    internal fun popular(code: Code) {
+        when (code) {
+            SUCCESS -> successMovieList()
+            ERROR -> TODO()
+            EMPTY -> TODO()
+            NOT_FOUND -> TODO()
+        }
+    }
+
+    internal fun latest(code: Code) {
         when (code) {
             SUCCESS -> {
                 server.enqueue(MockResponse()
                         .setResponseCode(200)
-                        .setBody(ResponseMocks.MovieResponseMocks.popular_200))
+                        .setBody(ResponseMocks.MovieResponseMocks.latest_200))
             }
 
-            ERROR -> {
-                server.enqueue(MockResponse()
-                        .setResponseCode(400)
-                        .setBody(ResponseMocks.MovieResponseMocks.nowPlaying_200))
-            }
+            ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
+    }
+
+    internal fun topRated(code: Code) {
+        when (code) {
+            SUCCESS -> successMovieList()
+            ERROR -> TODO()
+            EMPTY -> TODO()
+            NOT_FOUND -> TODO()
+        }
+    }
+
+    internal fun upComing(code: Code) {
+        when (code) {
+            SUCCESS -> successMovieList()
+            ERROR -> TODO()
+            EMPTY -> TODO()
+            NOT_FOUND -> TODO()
+        }
+    }
+
+    private fun successMovieList() {
+        server.enqueue(MockResponse()
+                .setResponseCode(200)
+                .setBody(ResponseMocks.MovieResponseMocks.movieList_200))
     }
 }
 
