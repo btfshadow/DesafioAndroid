@@ -15,6 +15,10 @@ object MoviesApiMock {
                 .build()
         MoviesApi.INSTANCE = moviesApi
     }
+
+    fun reset() {
+        MoviesApi.INSTANCE = null
+    }
 }
 
 

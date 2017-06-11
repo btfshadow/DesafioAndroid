@@ -31,11 +31,11 @@ class MoviesApiRobot {
 class MoviesApiResult(private val repositories: Call<Page<TVShow>>) {
 
     fun baseUrlIs(baseUrl: String) {
-        assertEquals(errorMessage("Url"), requestBaseUrl(repositories.request()), baseUrl)
+        assertEquals(errorMessage("Url"), baseUrl, requestBaseUrl(repositories.request()))
     }
 
     fun pageIs(page: String) {
-        assertEquals(errorMessage("Page"), pageParam(repositories.request()), page)
+        assertEquals(errorMessage("Page"), page, pageParam(repositories.request()))
     }
 
 }

@@ -1,5 +1,6 @@
 package br.com.concretesolutions.repository
 
+import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.robots.moviesRepository
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -57,11 +58,13 @@ class MoviesRepositoryTest {
     @Before
     fun setUp() {
         server.start()
+        MoviesApiMock.mock(server)
     }
 
     @After
     fun tearDown() {
         server.shutdown()
+        MoviesApiMock.reset()
     }
     // endregion
 }

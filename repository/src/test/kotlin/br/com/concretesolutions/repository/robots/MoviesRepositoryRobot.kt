@@ -1,7 +1,6 @@
 package br.com.concretesolutions.repository.robots
 
 import br.com.concretesolutions.repository.MoviesRepository
-import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.api.endpoint.MovieEndpoints.*
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
@@ -13,7 +12,6 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
 
 internal fun moviesRepository(server: MockWebServer, func: MoviesRepositoryRobot.() -> Unit): MoviesRepositoryRobot {
-    MoviesApiMock.mock(server)
     return MoviesRepositoryRobot(server).apply { func() }
 }
 
