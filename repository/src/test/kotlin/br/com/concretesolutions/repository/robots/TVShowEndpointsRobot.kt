@@ -22,7 +22,7 @@ class TVShowEndpointsRobot {
     }
 
     infix fun build(func: TVShowEndpointsResult.() -> Unit): TVShowEndpointsResult {
-        val tvShows = MoviesApi.get().getPopular(lang, page)
+        val tvShows = MoviesApi.get().getPopularTVShows(lang, page)
         return TVShowEndpointsResult(tvShows).apply { func() }
     }
 }

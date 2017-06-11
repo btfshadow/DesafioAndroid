@@ -7,6 +7,7 @@ import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
 import br.com.concretesolutions.repository.model.TVShow;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -14,10 +15,7 @@ import retrofit2.http.Query;
 public interface MoviesService {
     // Movies
     @GET(MovieEndpoints.latest)
-    Call<Movie> getLatest(
-            @Query("language") @LanguageType String language,
-            @Query("page") int page,
-            @Query("region") @RegionType String region);
+    Observable<Movie> getLatestMovie(@Query("language") @LanguageType String language);
 
     @GET(MovieEndpoints.nowPlaying)
     Call<Page<Movie>> getNowPlaying(
@@ -26,13 +24,13 @@ public interface MoviesService {
             @Query("region") @RegionType String region);
 
     @GET(MovieEndpoints.popular)
-    Call<Page<Movie>> getPopular(
+    Call<Page<Movie>> getPopularMovies(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
 
     @GET(MovieEndpoints.topRated)
-    Call<Page<Movie>> getTopRated(
+    Call<Page<Movie>> getTopRatedMovies(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
@@ -45,7 +43,7 @@ public interface MoviesService {
 
     // TV Shows
     @GET(TVShowEndpoints.latest)
-    Call<TVShow> getLatest(
+    Call<TVShow> getLatestTVShow(
             @Query("language") @LanguageType String language,
             @Query("page") int page);
 
@@ -60,12 +58,12 @@ public interface MoviesService {
             @Query("page") int page);
 
     @GET(TVShowEndpoints.popular)
-    Call<Page<TVShow>> getPopular(
+    Call<Page<TVShow>> getPopularTVShows(
             @Query("language") @LanguageType String language,
             @Query("page") int page);
 
     @GET(TVShowEndpoints.topRated)
-    Call<Page<TVShow>> getTopRated(
+    Call<Page<TVShow>> getTopRatedTVShows(
             @Query("language") @LanguageType String language,
             @Query("page") int page);
 

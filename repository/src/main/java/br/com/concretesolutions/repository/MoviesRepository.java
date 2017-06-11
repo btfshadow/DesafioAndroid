@@ -9,6 +9,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType;
 import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,19 +19,8 @@ public final class MoviesRepository {
     private MoviesRepository() {
     }
 
-    public static void latest(@LanguageType final String language, int page, @RegionType final String region) {
-        API().getLatest(language, page, region)
-                .enqueue(new Callback<Movie>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
-
-                    }
-                });
+    public static Observable<Movie> latest(@LanguageType final String language) {
+        return API().getLatestMovie(language);
     }
 
     public static void nowPlaying(@LanguageType final String language, int page, @RegionType final String region) {
@@ -47,7 +37,7 @@ public final class MoviesRepository {
     }
 
     public static void popular(@LanguageType final String language, int page, @RegionType final String region) {
-        API().getPopular(language, page, region)
+        API().getPopularMovies(language, page, region)
                 .enqueue(new Callback<Page<Movie>>() {
                     @Override
                     public void onResponse(@NonNull Call<Page<Movie>> call, @NonNull Response<Page<Movie>> response) {
@@ -62,7 +52,7 @@ public final class MoviesRepository {
     }
 
     public static void topRated(@LanguageType final String language, int page, @RegionType final String region) {
-        API().getTopRated(language, page, region)
+        API().getTopRatedMovies(language, page, region)
                 .enqueue(new Callback<Page<Movie>>() {
                     @Override
                     public void onResponse(@NonNull Call<Page<Movie>> call, @NonNull Response<Page<Movie>> response) {
