@@ -14,7 +14,7 @@ class MovieEndpointsTest {
     fun endpointShouldBeMovie() {
         movieEndpoints {
         } build {
-            endpointIs("movie/")
+            endpointIs("movie")
         }
     }
 

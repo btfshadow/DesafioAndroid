@@ -25,12 +25,12 @@ ext {
     minSdkVersion = 19
     targetSdkVersion = 25
 
-    supportLibraryVersion = "25.3.1"
-    constraintLayoutVersion = "1.0.2"
-    gsonVersion = "2.8.0"
-    retrofitVersion = "2.3.0"
-    okHttp = "3.6.0"
-    timber = "4.5.1"
+    supportLibraryVersion = '25.3.1'
+    constraintLayoutVersion = '1.0.2'
+    gsonVersion = '2.8.0'
+    retrofitVersion = '2.3.0'
+    okHttp = '3.8.0'
+    timber = '4.5.1'
     versionCode = Integer.parseInt(VERSION_CODE)
     versionName = VERSION_NAME
 }

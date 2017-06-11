@@ -17,9 +17,7 @@ android {
         debug {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
-            testCoverageEnabled false
         }
-
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
@@ -57,12 +55,11 @@ dependencies {
     }
 
     compile "com.squareup.okhttp3:okhttp:$versions.okHttp"
-    compile("com.squareup.okhttp3:logging-interceptor:$versions.okHttp") {
-        exclude module: 'okhttp'
-    }
+    compile("com.squareup.okhttp3:logging-interceptor:$versions.okHttp")
 
     compile "com.jakewharton.timber:timber:$versions.timber"
 
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    testCompile "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
