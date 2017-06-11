@@ -5,14 +5,19 @@ apply plugin: 'me.tatarka.retrolambda'
 final versions = rootProject.ext
 
 android {
+
+    dataBinding {
+        enabled true
+    }
+
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "br.com.concretesolutions.desafioandroid"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        versionCode versions.versionCode
+        versionName versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
