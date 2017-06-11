@@ -9,4 +9,6 @@ public final class MovieEndpoints {
     public static final String topRated = BASE_PATH + "top_rated";
     public static final String upcoming = BASE_PATH + "upcoming";
 
+    private MovieEndpoints() {
+    }
 }

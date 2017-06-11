@@ -8,8 +8,7 @@ private val pageIndex = 1
 private val regionIndex = 2
 
 fun requestEndpoint(request: Request): String {
-    val baseUrlSize = BuildConfig.BASE_URL.length
-    return request.url().toString().substring(baseUrlSize)
+    return request.url().pathSegments()[1]
 }
 
 fun pageParam(request: Request): String {
