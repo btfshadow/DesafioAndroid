@@ -21,7 +21,7 @@ class MoviesEndpointsRobot {
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val movies = MoviesApi.get().getPopular(lang, page, region)
+        val movies = MoviesApi.get().getPopularMovies(lang, page, region)
         return MoviesEndpointsResult(movies).apply { func() }
     }
 
