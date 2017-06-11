@@ -25,7 +25,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            testCoverageEnabled true
+            testCoverageEnabled false
         }
 
         release {
@@ -66,6 +66,8 @@ dependencies {
 
     compile "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     compile "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+
+    compile "com.squareup.picasso:picasso:$versions.picasso"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

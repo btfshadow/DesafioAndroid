@@ -33,6 +33,7 @@ ext {
     timber = '4.5.1'
     rxAndroid = '2.0.1'
     rxJava = '2.1.0'
+    picasso = '2.5.2'
     versionCode = Integer.parseInt(VERSION_CODE)
     versionName = VERSION_NAME
 }
