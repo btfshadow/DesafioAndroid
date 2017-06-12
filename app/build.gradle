@@ -1,15 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'me.tatarka.retrolambda'
+
+final versions = rootProject.ext
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    dataBinding {
+        enabled true
+    }
+
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "br.com.concretesolutions.desafioandroid"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -17,7 +25,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            testCoverageEnabled true
+            testCoverageEnabled false
         }
 
         release {
@@ -35,27 +43,35 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
-}
 
-final versions = rootProject.ext
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
 
 dependencies {
     compile project(':repository')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
-    compile "com.android.support.constraint:constraint-layout:$versions.constraintLayoutVersion"
+    compile "com.android.support:appcompat-v7:$versions.supportLibrary"
+    compile "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 
-    compile "com.google.code.gson:gson:$versions.gsonVersion"
-    compile "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
-    compile("com.squareup.retrofit2:converter-gson:$versions.retrofitVersion") {
+    compile "com.google.code.gson:gson:$versions.gson"
+    compile "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    compile("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
+
+    compile "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    compile "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+
+    compile "com.squareup.picasso:picasso:$versions.picasso"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
 }

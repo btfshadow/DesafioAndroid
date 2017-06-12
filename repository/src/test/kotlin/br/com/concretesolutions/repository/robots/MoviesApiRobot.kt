@@ -22,7 +22,7 @@ class MoviesApiRobot {
     }
 
     infix fun build(func: MoviesApiResult.() -> Unit): MoviesApiResult {
-        val repositories = MoviesApi.get().getPopular(LanguageType.PT_BR, page)
+        val repositories = MoviesApi.get().getPopularTVShows(LanguageType.PT_BR, page)
         return MoviesApiResult(repositories).apply { func() }
     }
 

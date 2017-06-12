@@ -2,25 +2,30 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'me.tatarka.retrolambda'
 
+final versions = rootProject.ext
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
     }
 
     def baseUrl = '"https://api.themoviedb.org/3/"'
     def apiKey = '"1cef6bd1d5e66557f3e1156e8f42109b"'
+    def baseImageUrl = '"https://image.tmdb.org/t/p/w500"'
 
     buildTypes {
         debug {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
+            buildConfigField 'String', 'BASE_IMAGE_URL', baseImageUrl
         }
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
+            buildConfigField 'String', 'BASE_IMAGE_URL', baseImageUrl
         }
     }
 
@@ -39,20 +44,23 @@ android {
     }
 }
 
-final versions = rootProject.ext
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "com.android.support:support-annotations:$versions.supportLibraryVersion"
+    compile "com.android.support:support-annotations:$versions.supportLibrary"
 
-    compile "com.google.code.gson:gson:$versions.gsonVersion"
+    compile "com.google.code.gson:gson:$versions.gson"
 
-    compile "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
-    compile("com.squareup.retrofit2:converter-gson:$versions.retrofitVersion") {
+    compile "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    compile("com.squareup.retrofit2:converter-gson:$versions.retrofit") {
         exclude module: 'retrofit'
         exclude module: 'gson'
     }
+    compile("com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit") {
+        exclude module: 'retrofit'
+    }
+
+    compile "io.reactivex.rxjava2:rxjava:$versions.rxJava"
 
     compile "com.squareup.okhttp3:okhttp:$versions.okHttp"
     compile("com.squareup.okhttp3:logging-interceptor:$versions.okHttp")
@@ -60,6 +68,6 @@ dependencies {
     compile "com.jakewharton.timber:timber:$versions.timber"
 
     testCompile 'junit:junit:4.12'
-    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
     testCompile "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }

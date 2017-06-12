@@ -81,7 +81,7 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         when (requestedEndpoint) {
             NOW_PLAYING -> MoviesRepository.nowPlaying(lang, page, region)
             POPULAR -> MoviesRepository.popular(lang, page, region)
-            LATEST -> MoviesRepository.latest(lang, page, region)
+            LATEST -> MoviesRepository.latest(lang).subscribe()
             TOP_RATED -> MoviesRepository.topRated(lang, page, region)
             UP_COMING -> MoviesRepository.upComing(lang, page, region)
         }
