@@ -28,14 +28,6 @@ class MoviesRepositoryTest {
         }
     }
 
-    @Test fun latest_shouldRequestLatestMovie() {
-        moviesRepository(server) {
-            latest()
-        } request {
-            latestRequested()
-        }
-    }
-
     @Test fun topRated_shouldRequestTopRatedMovies() {
         moviesRepository(server) {
             topRated()

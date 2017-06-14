@@ -9,7 +9,6 @@ import br.com.concretesolutions.repository.api.type.LanguageType;
 import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
-import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,10 +16,6 @@ import retrofit2.Response;
 public final class MoviesRepository {
 
     private MoviesRepository() {
-    }
-
-    public static Observable<Movie> latest(@LanguageType final String language) {
-        return API().getLatestMovie(language);
     }
 
     public static void nowPlaying(@LanguageType final String language, int page, @RegionType final String region) {

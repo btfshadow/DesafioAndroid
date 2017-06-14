@@ -23,10 +23,9 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
     @LanguageType private var lang = LanguageType.PT_BR
     enum class RequestedEndpoint(val endpointCode: Int) {
         NOW_PLAYING(0),
-        LATEST(1),
-        POPULAR(2),
-        TOP_RATED(3),
-        UP_COMING(4)
+        POPULAR(1),
+        TOP_RATED(2),
+        UP_COMING(3)
     }
 
     var requestedEndpoint: RequestedEndpoint = NOW_PLAYING
@@ -46,15 +45,6 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         mockRequest(server) {
             movies {
                 popular(SUCCESS)
-            }
-        }
-    }
-
-    fun latest() {
-        requestedEndpoint = LATEST
-        mockRequest(server) {
-            movies {
-                latest(SUCCESS)
             }
         }
     }
@@ -81,7 +71,6 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         when (requestedEndpoint) {
             NOW_PLAYING -> MoviesRepository.nowPlaying(lang, page, region)
             POPULAR -> MoviesRepository.popular(lang, page, region)
-            LATEST -> MoviesRepository.latest(lang).subscribe()
             TOP_RATED -> MoviesRepository.topRated(lang, page, region)
             UP_COMING -> MoviesRepository.upComing(lang, page, region)
         }
@@ -98,10 +87,6 @@ class MoviesRepositoryResult(private val server: MockWebServer) {
 
     fun popularRequested() {
         pathIsCorrect(popular)
-    }
-
-    fun latestRequested() {
-        pathIsCorrect(latest)
     }
 
     fun topRatedRequested() {
