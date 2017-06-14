@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.ActivityMainBinding;
 import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
-import br.com.concretesolutions.desafioandroid.viewmodel.LatestMovieViewModel;
 import br.com.concretesolutions.repository.model.Movie;
 import io.reactivex.disposables.CompositeDisposable;
 

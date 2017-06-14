@@ -1,11 +1,11 @@
 buildscript {
-    ext.kotlin = '1.1.2-4'
+    ext.kotlin = '1.1.2-5'
     repositories {
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
         classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
