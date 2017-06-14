@@ -17,8 +17,11 @@ public class Movie {
     @SerializedName("spoken_languages")
     private List<SpokenLanguage> languages;
 
+    @SerializedName("backdrop_path")
+    @Expose private String backdrop;
+
     @SerializedName("poster_path")
-    @Expose private String imageUrl;
+    @Expose private String poster;
 
     public String title() {
         return title;
@@ -32,7 +35,11 @@ public class Movie {
         return languages;
     }
 
-    public String imageUrl() {
-        return imageUrl;
+    public String backdrop() {
+        return backdrop;
+    }
+
+    public String poster() {
+        return poster;
     }
 }
