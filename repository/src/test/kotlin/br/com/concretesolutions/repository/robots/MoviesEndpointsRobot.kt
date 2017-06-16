@@ -21,7 +21,7 @@ class MoviesEndpointsRobot {
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val movies = MoviesApi.get().getPopularMovies(lang, page, region)
+        val movies = MoviesApi.get().getTopRatedMovies(lang, page, region)
         return MoviesEndpointsResult(movies).apply { func() }
     }
 
@@ -39,14 +39,17 @@ class MoviesEndpointsRobot {
 class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
     fun languageIs(language: String) {
         Assert.assertEquals(errorMessage("Language"), languageParam(movies.request()), language)
+        errorMessage("Language")
     }
 
     fun regionIs(region: String) {
         Assert.assertEquals(errorMessage("Region"), regionParam(movies.request()), region)
+        errorMessage("Language")
     }
 
     fun endpointIs(endpoint: String) {
         Assert.assertEquals(errorMessage("Endpoint"), requestEndpoint(movies.request()), endpoint)
+        errorMessage("Language")
     }
 }
 

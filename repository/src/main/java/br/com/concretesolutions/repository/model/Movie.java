@@ -13,15 +13,17 @@ public class Movie {
     @Expose
     private String overview;
 
-    @Expose
     @SerializedName("spoken_languages")
     private List<SpokenLanguage> languages;
 
     @SerializedName("backdrop_path")
-    @Expose private String backdrop;
+    private String backdrop;
 
     @SerializedName("poster_path")
-    @Expose private String poster;
+    private String poster;
+
+    @SerializedName("vote_average")
+    private String rating;
 
     public String title() {
         return title;
@@ -41,5 +43,9 @@ public class Movie {
 
     public String poster() {
         return poster;
+    }
+
+    public String rating() {
+        return rating;
     }
 }

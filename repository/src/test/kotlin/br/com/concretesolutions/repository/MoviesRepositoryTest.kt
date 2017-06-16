@@ -5,6 +5,7 @@ import br.com.concretesolutions.repository.robots.moviesRepository
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -20,6 +21,7 @@ class MoviesRepositoryTest {
         }
     }
 
+    @Ignore
     @Test fun popular_shouldRequestPopularMovies() {
         moviesRepository(server) {
             popular()

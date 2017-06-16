@@ -7,20 +7,21 @@ import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
 import br.com.concretesolutions.repository.model.TVShow;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MoviesService {
 
-    @GET(MovieEndpoints.nowPlaying)
-    Call<Page<Movie>> getNowPlaying(
+    @GET(MovieEndpoints.popular)
+    Observable<Page<Movie>> getPopularMovies(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
 
-    @GET(MovieEndpoints.popular)
-    Call<Page<Movie>> getPopularMovies(
+    @GET(MovieEndpoints.nowPlaying)
+    Call<Page<Movie>> getNowPlaying(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
