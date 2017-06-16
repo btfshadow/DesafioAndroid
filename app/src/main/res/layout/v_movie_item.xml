@@ -4,15 +4,17 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="obj"
             type="br.com.concretesolutions.desafioandroid.viewmodel.MovieItemViewModel" />
     </data>
 
     <LinearLayout
         android:id="@+id/movie_item_root"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:orientation="vertical">
 
         <ImageView
@@ -22,23 +24,27 @@
             android:layout_marginBottom="4dp"
             android:scaleType="fitXY"
             android:contentDescription="@string/cd_movie_poster"
-            android:src="@{viewModel.poster}" />
+            android:src="@{obj.poster}" />
 
         <TextView
             android:id="@+id/txt_movie_item_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{viewModel.title}"
+            android:text="@{obj.title}"
+            android:lines="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxWidth="128dp"
             android:textColor="@android:color/black"
             tools:text="Pirates of Caribbean" />
 
         <TextView
             android:id="@+id/txt_movie_item_rating"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{viewModel.getRating(context)}"
+            android:text="@{obj.getRating(context)}"
             tools:text="Ratings: 8.0" />
 
     </LinearLayout>

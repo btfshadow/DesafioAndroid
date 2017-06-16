@@ -9,7 +9,7 @@ import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.AMainBinding;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseFragment;
-import br.com.concretesolutions.desafioandroid.ui.feature.movie.MovieFragment;
+import br.com.concretesolutions.desafioandroid.ui.feature.movie.PopularMoviesFragment;
 import br.com.concretesolutions.desafioandroid.ui.feature.profile.ProfileFragment;
 import br.com.concretesolutions.desafioandroid.ui.feature.tv.TVShowFragment;
 import br.com.concretesolutions.desafioandroid.ui.util.FragmentUtils;
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
         switch (fragmentTag) {
             case MOVIE:
             default:
-                return MovieFragment.newInstance();
+                return PopularMoviesFragment.newInstance();
             case TV_SHOW:
                 return TVShowFragment.newInstance();
             case PROFILE:

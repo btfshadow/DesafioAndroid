@@ -30,6 +30,6 @@ public class MovieItemView extends FrameLayout {
     }
 
     public void movie(final MovieItemViewModel viewModel) {
-        binding.setViewModel(viewModel);
+        binding.setObj(viewModel);
     }
 }
