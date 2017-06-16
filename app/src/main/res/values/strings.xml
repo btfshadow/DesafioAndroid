@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">DesafioAndroid</string>
+    <string name="app_name">Movies and TV</string>
 
     <!-- Movie Item -->
     <string name="movie_item_rating">Rating: %1s</string>
+
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="profile">Profile</string>
 </resources>

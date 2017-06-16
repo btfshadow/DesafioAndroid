@@ -55,6 +55,7 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$versions.supportLibrary"
+    compile "com.android.support:design:$versions.supportLibrary"
     compile "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 
     compile "com.google.code.gson:gson:$versions.gson"

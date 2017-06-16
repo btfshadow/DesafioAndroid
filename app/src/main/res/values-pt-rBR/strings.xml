@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Filmes e Séries</string>
+
+    <!-- Movie Item -->
+    <string name="movie_item_rating">Avaliação: %1s</string>
+
+    <string name="movies">Filmes</string>
+    <string name="tv_shows">Séries</string>
+    <string name="profile">Perfil</string>
+
+</resources>

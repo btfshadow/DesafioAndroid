@@ -6,7 +6,11 @@ import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.model.Movie
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.utils.errorMessage
-import io.reactivex.Observable
+import br.com.concretesolutions.repository.utils.languageParam
+import br.com.concretesolutions.repository.utils.regionParam
+import br.com.concretesolutions.repository.utils.requestEndpoint
+import org.junit.Assert
+import retrofit2.Call
 
 fun movieEndpoints(func: MoviesEndpointsRobot.() -> Unit) = MoviesEndpointsRobot().apply { func() }
 
@@ -17,7 +21,7 @@ class MoviesEndpointsRobot {
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val movies = MoviesApi.get().getPopularMovies(lang, page, region)
+        val movies = MoviesApi.get().getTopRatedMovies(lang, page, region)
         return MoviesEndpointsResult(movies).apply { func() }
     }
 
@@ -32,19 +36,19 @@ class MoviesEndpointsRobot {
     }
 }
 
-class MoviesEndpointsResult(private val movies: Observable<Page<Movie>>) {
+class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
     fun languageIs(language: String) {
-//        Assert.assertEquals(errorMessage("Language"), languageParam(movies.request()), language)
+        Assert.assertEquals(errorMessage("Language"), languageParam(movies.request()), language)
         errorMessage("Language")
     }
 
     fun regionIs(region: String) {
-//        Assert.assertEquals(errorMessage("Region"), regionParam(movies.request()), region)
+        Assert.assertEquals(errorMessage("Region"), regionParam(movies.request()), region)
         errorMessage("Language")
     }
 
     fun endpointIs(endpoint: String) {
-//        Assert.assertEquals(errorMessage("Endpoint"), requestEndpoint(movies.request()), endpoint)
+        Assert.assertEquals(errorMessage("Endpoint"), requestEndpoint(movies.request()), endpoint)
         errorMessage("Language")
     }
 }
