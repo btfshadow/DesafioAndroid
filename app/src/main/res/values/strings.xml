@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DesafioAndroid</string>
+    <string name="cd_movie_poster">Movie Poster</string>
 </resources>

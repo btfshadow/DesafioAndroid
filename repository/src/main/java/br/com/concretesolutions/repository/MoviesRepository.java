@@ -9,6 +9,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType;
 import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,6 +17,10 @@ import retrofit2.Response;
 public final class MoviesRepository {
 
     private MoviesRepository() {
+    }
+
+    public static Observable<Page<Movie>> popular(@LanguageType final String language, int page, @RegionType final String region) {
+        return API().getPopularMovies(language, page, region);
     }
 
     public static void nowPlaying(@LanguageType final String language, int page, @RegionType final String region) {
@@ -27,21 +32,6 @@ public final class MoviesRepository {
 
                     @Override
                     public void onFailure(@NonNull Call<Page<Movie>> call, @NonNull Throwable t) {
-                    }
-                });
-    }
-
-    public static void popular(@LanguageType final String language, int page, @RegionType final String region) {
-        API().getPopularMovies(language, page, region)
-                .enqueue(new Callback<Page<Movie>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Page<Movie>> call, @NonNull Response<Page<Movie>> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<Page<Movie>> call, @NonNull Throwable t) {
-
                     }
                 });
     }
