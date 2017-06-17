@@ -8,12 +8,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-import br.com.concretesolutions.desafioandroid.databinding.ViewMovieItemBinding;
+import br.com.concretesolutions.desafioandroid.databinding.VMovieItemBinding;
 import br.com.concretesolutions.desafioandroid.viewmodel.MovieItemViewModel;
 
 public class MovieItemView extends FrameLayout {
 
-    private ViewMovieItemBinding binding;
+    private VMovieItemBinding binding;
 
     public MovieItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -26,10 +26,10 @@ public class MovieItemView extends FrameLayout {
     }
 
     private void init(@NonNull final Context context) {
-        binding = ViewMovieItemBinding.inflate(LayoutInflater.from(context), this, true);
+        binding = VMovieItemBinding.inflate(LayoutInflater.from(context), this, true);
     }
 
     public void movie(final MovieItemViewModel viewModel) {
-        binding.setViewModel(viewModel);
+        binding.setObj(viewModel);
     }
 }

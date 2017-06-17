@@ -6,4 +6,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoadingFragment" parent="@style/AppTheme">
+        <!-- title encapsulating main part (background) of custom alertdialog -->
+        <item name="android:windowFrame">@android:color/transparent</item>
+        <!-- turn off any drawable used to draw a frame on the window -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- turn off any drawable used to draw a frame on the window -->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@android:color/transparent</item>
+        <item name="android:windowNoTitle">false</item>
+    </style>
+
 </resources>

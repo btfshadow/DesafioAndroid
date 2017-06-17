@@ -9,5 +9,6 @@
     <string name="movies">Filmes</string>
     <string name="tv_shows">Séries</string>
     <string name="profile">Perfil</string>
+    <string name="popular">Popular</string>
 
 </resources>
