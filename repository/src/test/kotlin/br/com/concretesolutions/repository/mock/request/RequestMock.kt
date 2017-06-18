@@ -1,10 +1,10 @@
 package br.com.concretesolutions.repository.mock.request
 
-import okhttp3.mockwebserver.MockWebServer
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 
-fun mockRequest(server: MockWebServer, func: RequestMock.() -> Unit) = RequestMock(server).apply { func() }
+fun mockRequest(server: RequestMatcherRule, func: RequestMock.() -> Unit) = RequestMock(server).apply { func() }
 
-class RequestMock(private val server: MockWebServer) {
+class RequestMock(private val server: RequestMatcherRule) {
     fun movies(func: MovieRequestMock.() -> Unit) = MovieRequestMock(server).apply { func() }
 
     enum class Code(val code: Int) {

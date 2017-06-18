@@ -5,9 +5,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.repository.BuildConfig;
 import br.com.concretesolutions.repository.model.Movie;
+import br.com.concretesolutions.repository.model.Page;
 
 public class MovieItemViewModel implements Parcelable {
 
@@ -64,4 +68,13 @@ public class MovieItemViewModel implements Parcelable {
             return new MovieItemViewModel[size];
         }
     };
+
+    public static List<MovieItemViewModel> getViewModelList(final Page<Movie> moviePage) {
+        List<MovieItemViewModel> viewModelList = new ArrayList<>();
+
+        for (Movie movie : moviePage.results())
+            viewModelList.add(new MovieItemViewModel(movie));
+
+        return viewModelList;
+    }
 }
