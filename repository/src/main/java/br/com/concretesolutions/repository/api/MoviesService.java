@@ -21,19 +21,19 @@ public interface MoviesService {
             @Query("region") @RegionType String region);
 
     @GET(MovieEndpoints.nowPlaying)
-    Call<Page<Movie>> getNowPlaying(
+    Observable<Page<Movie>> getNowPlaying(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
 
     @GET(MovieEndpoints.topRated)
-    Call<Page<Movie>> getTopRatedMovies(
+    Observable<Page<Movie>> getTopRatedMovies(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);
 
     @GET(MovieEndpoints.upcoming)
-    Call<Page<Movie>> getUpcoming(
+    Observable<Page<Movie>> getUpcoming(
             @Query("language") @LanguageType String language,
             @Query("page") int page,
             @Query("region") @RegionType String region);

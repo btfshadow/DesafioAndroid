@@ -8,9 +8,9 @@ import br.com.concretesolutions.requestmatcher.model.HttpMethod
 
 class MovieRequestMock(private val server: RequestMatcherRule) {
 
-    internal fun nowPlaying(code: Code) {
+    internal fun nowPlaying(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
@@ -26,18 +26,18 @@ class MovieRequestMock(private val server: RequestMatcherRule) {
         }
     }
 
-    internal fun topRated(code: Code) {
+    internal fun topRated(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    internal fun upComing(code: Code) {
+    internal fun upComing(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()

@@ -4,7 +4,10 @@ import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.robots.moviesRepository
 import br.com.concretesolutions.requestmatcher.LocalTestRequestMatcherRule
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -19,7 +22,6 @@ class MoviesRepositoryTest {
         }
     }
 
-    @Ignore
     @Test fun popular_shouldRequestPopularMovies() {
         moviesRepository(server) {
             popular()
