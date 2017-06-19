@@ -2,10 +2,11 @@ package br.com.concretesolutions.repository
 
 import br.com.concretesolutions.repository.api.MoviesApiMock
 import br.com.concretesolutions.repository.robots.moviesRepository
-import okhttp3.mockwebserver.MockWebServer
+import br.com.concretesolutions.requestmatcher.LocalTestRequestMatcherRule
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -21,7 +22,6 @@ class MoviesRepositoryTest {
         }
     }
 
-    @Ignore
     @Test fun popular_shouldRequestPopularMovies() {
         moviesRepository(server) {
             popular()
@@ -47,17 +47,16 @@ class MoviesRepositoryTest {
     }
 
     // region Initialization
-    private val server = MockWebServer()
+    @JvmField @Rule
+    val server: RequestMatcherRule = LocalTestRequestMatcherRule()
 
     @Before
     fun setUp() {
-        server.start()
         MoviesApiMock.mock(server)
     }
 
     @After
     fun tearDown() {
-        server.shutdown()
         MoviesApiMock.reset()
     }
     // endregion

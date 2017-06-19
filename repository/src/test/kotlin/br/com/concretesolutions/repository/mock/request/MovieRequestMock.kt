@@ -2,66 +2,52 @@ package br.com.concretesolutions.repository.mock.request
 
 import br.com.concretesolutions.repository.mock.request.RequestMock.Code
 import br.com.concretesolutions.repository.mock.request.RequestMock.Code.*
-import br.com.concretesolutions.repository.mock.response.ResponseMocks
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
+import br.com.concretesolutions.requestmatcher.RequestMatchersGroup
+import br.com.concretesolutions.requestmatcher.model.HttpMethod
 
-class MovieRequestMock(private val server: MockWebServer) {
+class MovieRequestMock(private val server: RequestMatcherRule) {
 
-    internal fun nowPlaying(code: Code) {
+    internal fun nowPlaying(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    internal fun popular(code: Code) {
+    internal fun popular(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    internal fun latest(code: Code) {
+    internal fun topRated(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> {
-                server.enqueue(MockResponse()
-                        .setResponseCode(200)
-                        .setBody(ResponseMocks.MovieResponseMocks.latest_200))
-            }
-
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    internal fun topRated(code: Code) {
+    internal fun upComing(code: Code): RequestMatchersGroup {
         when (code) {
-            SUCCESS -> successMovieList()
+            SUCCESS -> return successMovieList()
             ERROR -> TODO()
             EMPTY -> TODO()
             NOT_FOUND -> TODO()
         }
     }
 
-    internal fun upComing(code: Code) {
-        when (code) {
-            SUCCESS -> successMovieList()
-            ERROR -> TODO()
-            EMPTY -> TODO()
-            NOT_FOUND -> TODO()
-        }
-    }
-
-    private fun successMovieList() {
-        server.enqueue(MockResponse()
-                .setResponseCode(200)
-                .setBody(ResponseMocks.MovieResponseMocks.movieList_200))
+    private fun successMovieList(): RequestMatchersGroup {
+        return server.addFixture(200, "movie_page_200.json")
+                .ifRequestMatches()
+                .methodIs(HttpMethod.GET)
     }
 }
 

@@ -6,15 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 import br.com.concretesolutions.desafioandroid.ui.base.category.BaseCategoryFragment;
-import br.com.concretesolutions.desafioandroid.viewmodel.MovieItemViewModel;
 import br.com.concretesolutions.repository.model.Movie;
 import br.com.concretesolutions.repository.model.Page;
+
+import static br.com.concretesolutions.desafioandroid.viewmodel.MovieItemViewModel.getViewModelList;
 
 public class PopularMoviesFragment extends BaseCategoryFragment {
 
@@ -40,12 +38,8 @@ public class PopularMoviesFragment extends BaseCategoryFragment {
         return view;
     }
 
-    private void onMoviesSuccess(Page<Movie> moviePage) {
-        List<MovieItemViewModel> viewModelList = new ArrayList<>();
-
-        for (Movie movie : moviePage.results())
-            viewModelList.add(new MovieItemViewModel(movie));
-        adapter.setList(viewModelList);
+    private void onMoviesSuccess(final Page<Movie> moviePage) {
+        adapter.setList(getViewModelList(moviePage));
     }
 
     private void onMoviesError(Throwable throwable) {

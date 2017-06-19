@@ -1,11 +1,11 @@
 package br.com.concretesolutions.repository.api
 
-import okhttp3.mockwebserver.MockWebServer
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MoviesApiMock {
 
-    fun mock(server: MockWebServer) {
+    fun mock(server: RequestMatcherRule) {
         val rootUrl: String = server.url("/").toString()
         val moviesApi = ApiBuilder<MoviesService>()
                 .baseUrl(rootUrl)

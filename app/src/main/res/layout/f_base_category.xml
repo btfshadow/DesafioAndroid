@@ -6,6 +6,7 @@
         android:id="@+id/category_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/default_minor_margin"
         android:background="@color/white"
         android:orientation="vertical">
 
