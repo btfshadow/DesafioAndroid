@@ -5,7 +5,6 @@ import okhttp3.Request
 
 private val languageIndex = 0
 private val pageIndex = 1
-private val regionIndex = 2
 
 fun requestEndpoint(request: Request): String {
     return request.url().pathSegments()[1]
@@ -18,10 +17,6 @@ fun pageParam(request: Request): String {
 fun requestBaseUrl(request: Request): String {
     val urlSize = BuildConfig.BASE_URL.length
     return request.url().toString().substring(0, urlSize)
-}
-
-fun regionParam(request: Request): String {
-    return request.url().queryParameterValue(regionIndex)
 }
 
 fun languageParam(request: Request): String {

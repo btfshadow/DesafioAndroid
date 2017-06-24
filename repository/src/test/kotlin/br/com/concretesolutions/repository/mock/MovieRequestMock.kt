@@ -1,14 +1,13 @@
-package br.com.concretesolutions.repository.mock.request
+package br.com.concretesolutions.repository.mock
 
-import br.com.concretesolutions.repository.mock.request.RequestMock.Code
-import br.com.concretesolutions.repository.mock.request.RequestMock.Code.*
+import br.com.concretesolutions.repository.mock.RequestMock.Code.*
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import br.com.concretesolutions.requestmatcher.RequestMatchersGroup
 import br.com.concretesolutions.requestmatcher.model.HttpMethod
 
 class MovieRequestMock(private val server: RequestMatcherRule) {
 
-    internal fun nowPlaying(code: Code): RequestMatchersGroup {
+    internal fun nowPlaying(code: RequestMock.Code): RequestMatchersGroup {
         when (code) {
             SUCCESS -> return successMovieList()
             ERROR -> TODO()
@@ -17,7 +16,7 @@ class MovieRequestMock(private val server: RequestMatcherRule) {
         }
     }
 
-    internal fun popular(code: Code): RequestMatchersGroup {
+    internal fun popular(code: RequestMock.Code): RequestMatchersGroup {
         when (code) {
             SUCCESS -> return successMovieList()
             ERROR -> TODO()
@@ -26,7 +25,7 @@ class MovieRequestMock(private val server: RequestMatcherRule) {
         }
     }
 
-    internal fun topRated(code: Code): RequestMatchersGroup {
+    internal fun topRated(code: RequestMock.Code): RequestMatchersGroup {
         when (code) {
             SUCCESS -> return successMovieList()
             ERROR -> TODO()
@@ -35,7 +34,7 @@ class MovieRequestMock(private val server: RequestMatcherRule) {
         }
     }
 
-    internal fun upComing(code: Code): RequestMatchersGroup {
+    internal fun upComing(code: RequestMock.Code): RequestMatchersGroup {
         when (code) {
             SUCCESS -> return successMovieList()
             ERROR -> TODO()

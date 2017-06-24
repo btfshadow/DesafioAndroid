@@ -1,4 +1,4 @@
-package br.com.concretesolutions.repository.mock.request
+package br.com.concretesolutions.repository.mock
 
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 
