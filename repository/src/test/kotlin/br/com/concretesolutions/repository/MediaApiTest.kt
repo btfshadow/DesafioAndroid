@@ -7,7 +7,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-class MoviesApiTest {
+class MediaApiTest {
 
     @Test
     fun baseUrl_isCorrect() {

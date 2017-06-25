@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Page<T> {
+public class Page<T extends Media> {
 
     @Expose private List<T> results;
     @Expose private int page;

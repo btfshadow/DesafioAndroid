@@ -7,17 +7,17 @@ object MoviesApiMock {
 
     fun mock(server: RequestMatcherRule) {
         val rootUrl: String = server.url("/").toString()
-        val moviesApi = ApiBuilder<MoviesService>()
+        val moviesApi = ApiBuilder<MediaService>()
                 .baseUrl(rootUrl)
                 .converterFactory(GsonConverterFactory.create())
-                .okHttpClient(MoviesApi.okHttpClient())
-                .service(MoviesService::class.java)
+                .okHttpClient(MediaApi.okHttpClient())
+                .service(MediaService::class.java)
                 .build()
-        MoviesApi.INSTANCE = moviesApi
+        MediaApi.INSTANCE = moviesApi
     }
 
     fun reset() {
-        MoviesApi.INSTANCE = null
+        MediaApi.INSTANCE = null
     }
 }
 
