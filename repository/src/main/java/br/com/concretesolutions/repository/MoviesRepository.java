@@ -1,8 +1,8 @@
 package br.com.concretesolutions.repository;
 
 
-import br.com.concretesolutions.repository.api.MoviesApi;
-import br.com.concretesolutions.repository.api.MoviesService;
+import br.com.concretesolutions.repository.api.MediaApi;
+import br.com.concretesolutions.repository.api.MediaService;
 import br.com.concretesolutions.repository.api.type.LanguageType;
 import br.com.concretesolutions.repository.api.type.RegionType;
 import br.com.concretesolutions.repository.model.Movie;
@@ -30,7 +30,7 @@ public final class MoviesRepository {
         return API().getUpcoming(language, page, region);
     }
 
-    private static MoviesService API() {
-        return MoviesApi.get();
+    private static MediaService API() {
+        return MediaApi.get();
     }
 }

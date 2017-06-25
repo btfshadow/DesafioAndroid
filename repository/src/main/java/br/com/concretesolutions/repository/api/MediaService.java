@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface MoviesService {
+public interface MediaService {
 
     @GET(MovieEndpoints.popular)
     Observable<Page<Movie>> getPopularMovies(

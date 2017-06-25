@@ -1,6 +1,6 @@
 package br.com.concretesolutions.repository.robots
 
-import br.com.concretesolutions.repository.api.MoviesApi
+import br.com.concretesolutions.repository.api.MediaApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.model.TVShow
@@ -22,7 +22,7 @@ class TVShowEndpointsRobot {
     }
 
     infix fun build(func: TVShowEndpointsResult.() -> Unit): TVShowEndpointsResult {
-        val tvShows = MoviesApi.get().getPopularTVShows(lang, page)
+        val tvShows = MediaApi.get().getPopularTVShows(lang, page)
         return TVShowEndpointsResult(tvShows).apply { func() }
     }
 }

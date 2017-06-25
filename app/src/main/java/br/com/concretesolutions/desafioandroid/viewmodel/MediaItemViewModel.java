@@ -5,25 +5,26 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.repository.BuildConfig;
+import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Movie;
-import br.com.concretesolutions.repository.model.Page;
+import br.com.concretesolutions.repository.model.TVShow;
 
-public class MovieItemViewModel implements Parcelable {
+public class MediaItemViewModel<T extends Media> implements Parcelable {
 
     private String title;
     private String rating;
     private String poster;
 
+    public MediaItemViewModel(@NonNull final T media) {
+        if (media instanceof Movie)
+            this.title = ((Movie) media).title();
+        else
+            this.title = ((TVShow) media).name();
 
-    public MovieItemViewModel(@NonNull final Movie movie) {
-        this.title = movie.title();
-        this.rating = movie.rating();
-        this.poster = movie.poster();
+        this.rating = media.rating();
+        this.poster = media.poster();
     }
 
     public String getTitle() {
@@ -51,30 +52,21 @@ public class MovieItemViewModel implements Parcelable {
         dest.writeString(this.poster);
     }
 
-    protected MovieItemViewModel(Parcel in) {
+    private MediaItemViewModel(Parcel in) {
         this.title = in.readString();
         this.rating = in.readString();
         this.poster = in.readString();
     }
 
-    public static final Creator<MovieItemViewModel> CREATOR = new Creator<MovieItemViewModel>() {
+    public static final Creator<MediaItemViewModel> CREATOR = new Creator<MediaItemViewModel>() {
         @Override
-        public MovieItemViewModel createFromParcel(Parcel source) {
-            return new MovieItemViewModel(source);
+        public MediaItemViewModel createFromParcel(Parcel source) {
+            return new MediaItemViewModel(source);
         }
 
         @Override
-        public MovieItemViewModel[] newArray(int size) {
-            return new MovieItemViewModel[size];
+        public MediaItemViewModel[] newArray(int size) {
+            return new MediaItemViewModel[size];
         }
     };
-
-    public static List<MovieItemViewModel> getViewModelList(final Page<Movie> moviePage) {
-        List<MovieItemViewModel> viewModelList = new ArrayList<>();
-
-        for (Movie movie : moviePage.results())
-            viewModelList.add(new MovieItemViewModel(movie));
-
-        return viewModelList;
-    }
 }

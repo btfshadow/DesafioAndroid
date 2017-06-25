@@ -1,6 +1,6 @@
 package br.com.concretesolutions.repository.robots
 
-import br.com.concretesolutions.repository.api.MoviesApi
+import br.com.concretesolutions.repository.api.MediaApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
@@ -20,7 +20,7 @@ class MoviesEndpointsRobot(private val server: RequestMatcherRule) {
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val movies = MoviesApi.get().getPopularMovies(lang, page, region)
+        val movies = MediaApi.get().getPopularMovies(lang, page, region)
         return MoviesEndpointsResult(server, movies).apply { func() }
     }
 

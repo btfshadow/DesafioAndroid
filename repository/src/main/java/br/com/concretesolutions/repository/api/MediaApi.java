@@ -11,23 +11,23 @@ import timber.log.Timber;
 
 import static okhttp3.logging.HttpLoggingInterceptor.Level.BODY;
 
-public class MoviesApi {
+public class MediaApi {
 
-    static MoviesService INSTANCE;
+    static MediaService INSTANCE;
 
-    public static MoviesService get() {
+    public static MediaService get() {
         if (INSTANCE == null) {
             INSTANCE = build();
         }
         return INSTANCE;
     }
 
-    private static MoviesService build() {
-        return new ApiBuilder<MoviesService>()
+    private static MediaService build() {
+        return new ApiBuilder<MediaService>()
                 .baseUrl(BuildConfig.BASE_URL)
                 .converterFactory(GsonConverterFactory.create())
                 .okHttpClient(okHttpClient())
-                .service(MoviesService.class)
+                .service(MediaService.class)
                 .build();
     }
 

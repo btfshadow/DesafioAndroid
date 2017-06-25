@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
     private @MainTabs String changeToFragment(@NonNull final String fragmentTag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction = removeCurrentFragment(transaction, fragmentTag);
-        transaction = attachNewFragment(fragmentTag, transaction);
+        transaction = attachNewFragment(transaction, fragmentTag);
         transaction.commit();
         return fragmentTag;
     }
@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
         return transaction;
     }
 
-    private FragmentTransaction attachNewFragment(@NonNull String fragmentTag, FragmentTransaction transaction) {
+    private FragmentTransaction attachNewFragment(final FragmentTransaction transaction, @NonNull String fragmentTag) {
         final BaseFragment fragment = FragmentUtils.findByTag(this, fragmentTag);
         if (fragment == null)
             transaction.add(R.id.main_fragment_root, createFragmentByTag(fragmentTag), fragmentTag);
