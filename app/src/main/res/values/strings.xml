@@ -8,4 +8,10 @@
     <string name="tv_shows">TV Shows</string>
     <string name="profile">Profile</string>
     <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="up_coming">Up Coming</string>
+    <string name="category_item_error">Error on loading, click to retry</string>
+    <string name="airing_today">Airing today</string>
+    <string name="on_the_air">On The Air</string>
 </resources>

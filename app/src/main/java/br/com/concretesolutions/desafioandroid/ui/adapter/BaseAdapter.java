@@ -110,6 +110,10 @@ public class BaseAdapter<T extends Parcelable> extends RecyclerView.Adapter<View
         list.clear();
         notifyDataSetChanged();
     }
+
+    public T getItem(int position) {
+        return list.get(position);
+    }
     // endregion
 
     private LayoutInflater getLayoutInflater(@NonNull final ViewGroup parent) {

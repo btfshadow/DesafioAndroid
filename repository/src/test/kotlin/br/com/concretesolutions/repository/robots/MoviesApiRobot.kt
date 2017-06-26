@@ -3,7 +3,6 @@ package br.com.concretesolutions.repository.robots
 import br.com.concretesolutions.repository.api.MediaApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.model.Page
-import br.com.concretesolutions.repository.model.TVShow
 import br.com.concretesolutions.repository.utils.errorMessage
 import br.com.concretesolutions.repository.utils.pageParam
 import br.com.concretesolutions.repository.utils.requestBaseUrl

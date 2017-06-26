@@ -5,7 +5,6 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
 import br.com.concretesolutions.repository.mock.mockRequest
-import br.com.concretesolutions.repository.model.Movie
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import io.reactivex.Observable
