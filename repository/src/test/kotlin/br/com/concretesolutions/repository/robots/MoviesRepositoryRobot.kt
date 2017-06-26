@@ -6,6 +6,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
 import br.com.concretesolutions.repository.mock.mockRequest
+import br.com.concretesolutions.repository.model.Media
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.robots.MoviesRepositoryRobot.RequestedEndpoint.*
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
@@ -70,7 +71,7 @@ class MoviesRepositoryRobot(val server: RequestMatcherRule) {
     }
 
     infix fun request(func: MoviesRepositoryResult.() -> Unit): MoviesRepositoryResult {
-        val movies: Observable<Page<Movie>>
+        val movies: Observable<Page<Media>>
         when (requestedEndpoint) {
             NOW_PLAYING -> movies = MoviesRepository.nowPlaying(lang, page, region)
             POPULAR -> movies = MoviesRepository.popular(lang, page, region)
@@ -82,7 +83,7 @@ class MoviesRepositoryRobot(val server: RequestMatcherRule) {
 
 }
 
-class MoviesRepositoryResult(private val requestMatcher: RequestMatchersGroup?, private val movies: Observable<Page<Movie>>) {
+class MoviesRepositoryResult(private val requestMatcher: RequestMatchersGroup?, private val movies: Observable<Page<Media>>) {
 
     fun nowPlayingRequested() {
         requestMatcher?.pathIs(getPath(nowPlaying))
