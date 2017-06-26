@@ -5,7 +5,7 @@ import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
 import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
 import br.com.concretesolutions.repository.mock.mockRequest
-import br.com.concretesolutions.repository.model.Movie
+import br.com.concretesolutions.repository.model.Media
 import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import io.reactivex.Observable
@@ -35,7 +35,7 @@ class MoviesEndpointsRobot(private val server: RequestMatcherRule) {
     }
 }
 
-class MoviesEndpointsResult(private val server: RequestMatcherRule, private val movies: Observable<Page<Movie>>) {
+class MoviesEndpointsResult(private val server: RequestMatcherRule, private val movies: Observable<Page<Media>>) {
     fun languageIs(language: String) {
         mockRequest(server)
         {

@@ -10,5 +10,8 @@
     <string name="tv_shows">Séries</string>
     <string name="profile">Perfil</string>
     <string name="popular">Popular</string>
+    <string name="category_item_error">Erro ao carregar, clique para tentar novamente</string>
+    <string name="airing_today">Estréias</string>
+    <string name="on_the_air">No ar</string>
 
 </resources>

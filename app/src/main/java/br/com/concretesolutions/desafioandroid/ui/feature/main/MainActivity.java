@@ -9,9 +9,9 @@ import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.AMainBinding;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseFragment;
-import br.com.concretesolutions.desafioandroid.ui.feature.movie.PopularMoviesFragment;
+import br.com.concretesolutions.desafioandroid.ui.feature.MediaFragment;
+import br.com.concretesolutions.desafioandroid.ui.feature.MediaCategoriesBuilder;
 import br.com.concretesolutions.desafioandroid.ui.feature.profile.ProfileFragment;
-import br.com.concretesolutions.desafioandroid.ui.feature.tv.TVShowFragment;
 import br.com.concretesolutions.desafioandroid.ui.util.FragmentUtils;
 
 import static br.com.concretesolutions.desafioandroid.ui.feature.main.MainTabs.MOVIE;
@@ -95,9 +95,9 @@ public class MainActivity extends BaseActivity {
         switch (fragmentTag) {
             case MOVIE:
             default:
-                return PopularMoviesFragment.newInstance();
+                return MediaFragment.newInstance(MediaCategoriesBuilder.buildMovies());
             case TV_SHOW:
-                return TVShowFragment.newInstance();
+                return MediaFragment.newInstance(MediaCategoriesBuilder.buildTVShows());
             case PROFILE:
                 return ProfileFragment.newInstance();
         }

@@ -7,6 +7,9 @@ import java.util.List;
 
 public class Media {
 
+    @SerializedName(value = "title", alternate = {"name"})
+    private String title;
+
     @Expose
     private String overview;
 
@@ -40,5 +43,9 @@ public class Media {
 
     public String rating() {
         return rating;
+    }
+
+    public String title() {
+        return title;
     }
 }

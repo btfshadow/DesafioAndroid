@@ -8,21 +8,15 @@ import android.support.annotation.NonNull;
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.repository.BuildConfig;
 import br.com.concretesolutions.repository.model.Media;
-import br.com.concretesolutions.repository.model.Movie;
-import br.com.concretesolutions.repository.model.TVShow;
 
-public class MediaItemViewModel<T extends Media> implements Parcelable {
+public class MediaItemViewModel implements Parcelable {
 
     private String title;
     private String rating;
     private String poster;
 
-    public MediaItemViewModel(@NonNull final T media) {
-        if (media instanceof Movie)
-            this.title = ((Movie) media).title();
-        else
-            this.title = ((TVShow) media).name();
-
+    public MediaItemViewModel(@NonNull final Media media) {
+        this.title = media.title();
         this.rating = media.rating();
         this.poster = media.poster();
     }
