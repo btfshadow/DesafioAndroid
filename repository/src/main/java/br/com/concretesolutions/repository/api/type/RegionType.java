@@ -9,7 +9,7 @@ import static br.com.concretesolutions.repository.api.type.RegionType.BR;
 import static br.com.concretesolutions.repository.api.type.RegionType.EN;
 
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @StringDef({BR, EN})
 public @interface RegionType {
     String BR = "BR";

@@ -72,9 +72,10 @@ dependencies {
 
     compile "com.squareup.picasso:picasso:$versions.picasso"
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestCompile "br.com.concretesolutions:kappuccino:$versions.kappuccino"
+    androidTestCompile "br.com.concretesolutions:requestmatcher:$versions.requestMatcher"
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
+
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
 }

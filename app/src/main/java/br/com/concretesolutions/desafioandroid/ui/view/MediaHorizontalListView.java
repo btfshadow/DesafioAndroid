@@ -26,7 +26,7 @@ import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class MediaHorizontalItemView extends FrameLayout {
+public class MediaHorizontalListView extends FrameLayout {
 
     private static final String STATE_ADAPTER = "STATE_ADAPTER_1";
 
@@ -36,12 +36,12 @@ public class MediaHorizontalItemView extends FrameLayout {
     @MediaManagerType
     private int mediaManager;
 
-    public MediaHorizontalItemView(@NonNull Context context) {
+    public MediaHorizontalListView(@NonNull Context context) {
         super(context);
         init(context);
     }
 
-    public MediaHorizontalItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MediaHorizontalListView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
