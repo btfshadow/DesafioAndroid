@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.FMediaBinding;
-import br.com.concretesolutions.desafioandroid.ui.adapter.CategoryAdapter;
+import br.com.concretesolutions.desafioandroid.ui.adapter.BaseAdapter;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseFragment;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
 
@@ -22,7 +22,7 @@ public class MediaFragment extends BaseFragment {
     private static final String STATE_ADAPTER = "STATE_ADAPTER_0";
     private static final String VIEW_MODEL_LIST_KEY = "VIEW_MODEL_LIST_KEY";
     private FMediaBinding binding;
-    private CategoryAdapter adapter;
+    private BaseAdapter<CategoryViewModel> adapter;
 
     public static MediaFragment newInstance(@NonNull final ArrayList<CategoryViewModel> viewModelList) {
         Bundle args = new Bundle();
@@ -43,7 +43,7 @@ public class MediaFragment extends BaseFragment {
     }
 
     private void setupAdapter(Bundle savedInstanceState) {
-        adapter = new CategoryAdapter();
+        adapter = new BaseAdapter<>(R.layout.v_category_item);
         if (savedInstanceState != null)
             adapter.restoreInstanceState(savedInstanceState.getBundle(STATE_ADAPTER));
         final ArrayList<CategoryViewModel> viewModelList = getArguments().getParcelableArrayList(VIEW_MODEL_LIST_KEY);

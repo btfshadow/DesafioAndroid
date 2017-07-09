@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.support.annotation.StringRes;
 
 import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
-import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 
 public class CategoryViewModel implements Parcelable{
 
@@ -18,7 +17,7 @@ public class CategoryViewModel implements Parcelable{
         this.manager = manager;
     }
 
-    public @MoviesManager.MovieCategoryType @StringRes int getCategoryName() {
+    public @StringRes int getCategoryName() {
         return categoryName;
     }
 

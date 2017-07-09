@@ -13,7 +13,7 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level.BODY;
 
 public class MediaApi {
 
-    static MediaService INSTANCE;
+    public static MediaService INSTANCE;
 
     public static MediaService get() {
         if (INSTANCE == null) {

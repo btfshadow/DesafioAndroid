@@ -20,6 +20,7 @@ import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 import br.com.concretesolutions.desafioandroid.manager.TVShowsManager;
 import br.com.concretesolutions.desafioandroid.ui.adapter.BaseAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
+import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
 import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
@@ -33,8 +34,6 @@ public class MediaHorizontalListView extends FrameLayout {
     private VMediaHorizontalItemBinding binding;
     private BaseAdapter<MediaItemViewModel> adapter;
     private CompositeDisposable subscriptions = new CompositeDisposable();
-    @MediaManagerType
-    private int mediaManager;
 
     public MediaHorizontalListView(@NonNull Context context) {
         super(context);
@@ -54,16 +53,23 @@ public class MediaHorizontalListView extends FrameLayout {
         setupRecyclerView();
     }
 
-    public void setManagerType(@MediaManagerType int mediaManager) {
-        this.mediaManager = mediaManager;
+    public void setObj(@Nullable CategoryViewModel obj) {
+        if (obj == null)
+            return;
+
+        try {
+            getMedia(obj.getCategoryName(), obj.getManagerType());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void getMedia(@MoviesManager.MovieCategoryType int category) throws NoSuchMethodException {
+    public void getMedia(int category, @MediaManagerType int managerType) throws NoSuchMethodException {
         loading(true);
         error(false);
 
         Observable<Page<Media>> observable;
-        if (mediaManager == MediaManagerType.MOVIE)
+        if (managerType == MediaManagerType.MOVIE)
             observable = MoviesManager.get(category);
         else
             observable = TVShowsManager.get(category);

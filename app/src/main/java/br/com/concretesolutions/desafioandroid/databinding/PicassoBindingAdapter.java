@@ -2,7 +2,6 @@ package br.com.concretesolutions.desafioandroid.databinding;
 
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
@@ -15,7 +14,6 @@ public final class PicassoBindingAdapter {
 
     @BindingAdapter(value = {"android:src"}, requireAll = false)
     public static void setImageUrl(ImageView view, String url) {
-        Log.e("PicassoBindingAdapter", "setImageUrl: ");
         if (TextUtils.isEmpty(url)) {
             view.setImageResource(R.drawable.ic_broken_image);
             return;
