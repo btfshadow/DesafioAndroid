@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.text.TextUtils"/>
+
         <variable
             name="obj"
             type="br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel" />
@@ -19,16 +22,16 @@
             android:layout_width="128dp"
             android:layout_height="192dp"
             android:layout_marginBottom="4dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/cd_movie_poster"
-            android:src="@{obj.poster}" />
+            android:contentDescription="@string/cd_media_poster"
+            android:src="@{obj.poster}"
+            tools:src="@drawable/ic_image_placeholder"/>
 
         <TextView
             android:id="@+id/txt_media_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="@{obj.title}"
+            android:text="@{TextUtils.isEmpty(obj.title) ? @string/media_item_no_title : obj.title}"
             android:lines="1"
             android:ellipsize="end"
             android:maxLines="1"
@@ -40,7 +43,7 @@
             android:id="@+id/txt_media_item_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{obj.getRating(context)}"
+            android:text="@{TextUtils.isEmpty(obj.rating) ? @string/media_item_no_rating : @string/media_item_rating(obj.rating, obj.rating)}"
             tools:text="Ratings: 8.0" />
 
     </LinearLayout>

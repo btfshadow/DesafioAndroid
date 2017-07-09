@@ -3,8 +3,10 @@
 
     <string name="app_name">Filmes e Séries</string>
 
-    <!-- Movie Item -->
-    <string name="movie_item_rating">Avaliação: %1s</string>
+    <!-- Media Item -->
+    <string name="media_item_rating">Avaliação: %1s</string>
+    <string name="media_item_no_title">Título indisponível</string>
+    <string name="media_item_no_rating">Avaliação indisponível</string>
 
     <string name="movies">Filmes</string>
     <string name="tv_shows">Séries</string>

@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="default_background">#E4E6E7</color>
     <color name="white">@android:color/white</color>
-    <color name="gray_semi_transparent_664d4d4d">#664d4d4d</color>
+    <color name="gray_semi_transparent">#664d4d4d</color>
 </resources>

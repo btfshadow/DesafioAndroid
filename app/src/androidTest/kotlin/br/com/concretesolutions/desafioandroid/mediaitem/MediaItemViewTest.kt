@@ -15,8 +15,44 @@ class MediaItemViewTest : BaseViewTest(R.layout.v_media_item) {
             everythingIsOk()
         } areVisible {
             mediaPoster()
-            mediaName()
+            mediaTitle()
             mediaRating()
+        }
+    }
+
+    @Test
+    fun whenNoPoster_showBrokenImage() {
+        mediaItem(rule) {
+            noPoster()
+        } areVisible {
+            posterError()
+        }
+    }
+
+    @Test
+    fun whenErrorLoadingPoster_showReloadImage() {
+        mediaItem(rule) {
+            errorLoadingPoster()
+        } areVisible {
+            reloadPoster()
+        }
+    }
+
+    @Test
+    fun whenNoTitle_showNoTitleText() {
+        mediaItem(rule) {
+            noTitle()
+        } areVisible {
+            noTitleText()
+        }
+    }
+
+    @Test
+    fun whenNoRating_showNoRatingText() {
+        mediaItem(rule) {
+            noRating()
+        } areVisible {
+            noRatingText()
         }
     }
 }
