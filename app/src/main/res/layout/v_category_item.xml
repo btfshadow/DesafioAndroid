@@ -32,7 +32,7 @@
                 android:text="@{obj.categoryName}"
                 tools:text="Popular" />
 
-            <br.com.concretesolutions.desafioandroid.ui.view.MediaHorizontalItemView
+            <br.com.concretesolutions.desafioandroid.ui.view.MediaHorizontalListView
                 android:id="@+id/media_horizontal_list"
                 android:layout_width="match_parent"
                 android:layout_height="250dp" />

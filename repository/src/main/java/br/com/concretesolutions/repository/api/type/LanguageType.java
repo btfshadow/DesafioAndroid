@@ -9,7 +9,7 @@ import static br.com.concretesolutions.repository.api.type.LanguageType.EN_US;
 import static br.com.concretesolutions.repository.api.type.LanguageType.PT_BR;
 
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @StringDef({PT_BR, EN_US})
 public @interface LanguageType {
     String PT_BR = "pt-BR";
