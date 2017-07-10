@@ -8,6 +8,7 @@ import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity
 import br.com.concretesolutions.kappuccino.utils.doWait
 import br.com.concretesolutions.repository.api.ApiBuilder
 import br.com.concretesolutions.repository.api.MediaApi
+import br.com.concretesolutions.repository.api.MediaApiMock
 import br.com.concretesolutions.repository.api.MediaService
 import br.com.concretesolutions.requestmatcher.InstrumentedTestRequestMatcherRule
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
@@ -32,7 +33,7 @@ abstract class BaseActivityTest<T : BaseActivity>(val autoLaunch: Boolean = true
                 .service(MediaService::class.java)
                 .build()
 
-        MediaApi.INSTANCE = mediaMock
+        MediaApiMock.mock(mediaMock)
 
         if (autoLaunch) launch()
     }
