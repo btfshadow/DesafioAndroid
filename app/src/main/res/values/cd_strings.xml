@@ -1,4 +1,4 @@
 <resources>
     <!-- Content Description -->
-    <string name="cd_movie_poster">Movie Poster</string>
+    <string name="cd_media_poster">Poster</string>
 </resources>

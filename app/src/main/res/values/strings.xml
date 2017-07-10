@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Movies and TV</string>
 
-    <!-- Movie Item -->
-    <string name="movie_item_rating">Rating: %1s</string>
+    <!-- Media Item -->
+    <string name="media_item_rating">Rating: %1s</string>
+    <string name="media_item_no_title">Unavailable Title</string>
 
     <string name="movies">Movies</string>
     <string name="tv_shows">TV Shows</string>
@@ -14,4 +15,5 @@
     <string name="category_item_error">Error on loading, click to retry</string>
     <string name="airing_today">Airing today</string>
     <string name="on_the_air">On The Air</string>
+    <string name="media_item_no_rating">Unavailable rating</string>
 </resources>

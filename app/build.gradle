@@ -75,6 +75,7 @@ dependencies {
     androidTestCompile "br.com.concretesolutions:kappuccino:$versions.kappuccino"
     androidTestCompile "br.com.concretesolutions:requestmatcher:$versions.requestMatcher"
     androidTestCompile "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
+    androidTestCompile "org.mockito:mockito-android:$versions.mockito"
 
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"

@@ -37,6 +37,7 @@ ext {
     requestMatcher = '2.2.0'
     hamcrest = '1.3'
     kappuccino = '0.11.1'
+    mockito = '2.8.9'
     versionCode = Integer.parseInt(VERSION_CODE)
     versionName = VERSION_NAME
 }

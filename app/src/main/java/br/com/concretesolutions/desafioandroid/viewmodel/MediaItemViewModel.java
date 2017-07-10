@@ -1,11 +1,9 @@
 package br.com.concretesolutions.desafioandroid.viewmodel;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.repository.BuildConfig;
 import br.com.concretesolutions.repository.model.Media;
 
@@ -25,8 +23,8 @@ public class MediaItemViewModel implements Parcelable {
         return title;
     }
 
-    public String getRating(final Context context) {
-        return String.format(context.getString(R.string.movie_item_rating), rating);
+    public String getRating() {
+        return rating;
     }
 
     public String getPoster() {
