@@ -10,18 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemBinding;
 import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
 import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 import br.com.concretesolutions.desafioandroid.manager.TVShowsManager;
-import br.com.concretesolutions.desafioandroid.ui.adapter.BaseAdapter;
+import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
-import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
@@ -32,7 +28,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private static final String STATE_ADAPTER = "STATE_ADAPTER_1";
 
     private VMediaHorizontalItemBinding binding;
-    private BaseAdapter<MediaItemViewModel> adapter;
+    private HorizontalListAdapter adapter;
     private CompositeDisposable subscriptions = new CompositeDisposable();
 
     public MediaHorizontalListView(@NonNull Context context) {
@@ -89,7 +85,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private void onMediaSuccess(final Page<Media> mediaPage) {
         loading(false);
         error(false);
-        adapter.setList(getViewModelList(mediaPage));
+        adapter.setList(CategoryViewModel.getViewModelList(mediaPage));
     }
 
     private void onMediaError(Throwable throwable) {
@@ -99,7 +95,7 @@ public class MediaHorizontalListView extends FrameLayout {
     }
 
     private void setupAdapter() {
-        adapter = new BaseAdapter<>(R.layout.v_media_item);
+        adapter = new HorizontalListAdapter();
     }
 
     private void setupRecyclerView() {
@@ -121,15 +117,6 @@ public class MediaHorizontalListView extends FrameLayout {
 
     private void changeVisibility(final View view, boolean show) {
         view.setVisibility(show ? View.VISIBLE : GONE);
-    }
-
-    private List<MediaItemViewModel> getViewModelList(final Page<Media> mediaPage) {
-        List<MediaItemViewModel> viewModelList = new ArrayList<>();
-
-        for (Media media : mediaPage.results())
-            viewModelList.add(new MediaItemViewModel(media));
-
-        return viewModelList;
     }
 
     @Override
