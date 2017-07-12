@@ -26,17 +26,15 @@ public class MoviesManager {
 
     @Retention(RetentionPolicy.CLASS)
     @IntDef({POPULAR, TOP_RATED, NOW_PLAYING, UP_COMING})
-    public @interface MovieCategoryType {
+    @interface MovieCategoryType {
         int POPULAR = R.string.popular;
         int TOP_RATED = R.string.top_rated;
         int NOW_PLAYING = R.string.now_playing;
         int UP_COMING = R.string.up_coming;
     }
 
-    public static Observable<Page<Media>> get(@MovieCategoryType int category) throws NoSuchMethodException {
+    public static Observable<Page<Media>> get(@MovieCategoryType int category) {
         switch (category) {
-            default:
-                throw new NoSuchMethodException("This method does not exist in MoviesManager");
             case POPULAR:
                 return getPopular();
             case TOP_RATED:
@@ -45,6 +43,8 @@ public class MoviesManager {
                 return getNowPlaying();
             case UP_COMING:
                 return getUpComing();
+            default:
+                return getPopular();
         }
     }
 

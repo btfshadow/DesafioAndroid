@@ -1,4 +1,4 @@
-package br.com.concretesolutions.desafioandroid.mocks
+package br.com.concretesolutions.desafioandroid.mock
 
 import br.com.concretesolutions.desafioandroid.util.JsonFileReader.Companion.readFixture
 import br.com.concretesolutions.repository.model.Media

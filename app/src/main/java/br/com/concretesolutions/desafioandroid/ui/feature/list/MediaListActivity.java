@@ -1,4 +1,4 @@
-package br.com.concretesolutions.desafioandroid.ui.feature;
+package br.com.concretesolutions.desafioandroid.ui.feature.list;
 
 import android.content.Context;
 import android.content.Intent;

@@ -53,14 +53,11 @@ public class MediaHorizontalListView extends FrameLayout {
         if (obj == null)
             return;
 
-        try {
-            getMedia(obj.getCategoryName(), obj.getManagerType());
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        binding.setObj(obj);
+        getMedia(obj.getCategoryName(), obj.getManagerType());
     }
 
-    public void getMedia(int category, @MediaManagerType int managerType) throws NoSuchMethodException {
+    public void getMedia(int category, @MediaManagerType int managerType) {
         loading(true);
         error(false);
 
@@ -69,7 +66,7 @@ public class MediaHorizontalListView extends FrameLayout {
             observable = MoviesManager.get(category);
         else
             observable = TVShowsManager.get(category);
-            subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
+        subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
     }
 
     public void restoreInstanceState(final Bundle savedInstanceState) {
@@ -101,7 +98,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        int decorationSpace= getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_4dp);
+        int decorationSpace = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_4dp);
         binding.recyclerView.addItemDecoration(new CustomItemDecoration(decorationSpace));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -113,6 +110,10 @@ public class MediaHorizontalListView extends FrameLayout {
 
     private void error(boolean show) {
         changeVisibility(binding.txtErrorView, show);
+        final CategoryViewModel obj = binding.getObj();
+        binding.txtErrorView.setOnClickListener(v -> {
+            getMedia(obj.getCategoryName(), obj.getManagerType());
+        });
     }
 
     private void changeVisibility(final View view, boolean show) {

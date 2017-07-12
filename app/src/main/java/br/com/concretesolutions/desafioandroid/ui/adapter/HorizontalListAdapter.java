@@ -5,8 +5,10 @@ import android.databinding.DataBindingUtil;
 import android.view.ViewGroup;
 
 import br.com.concretesolutions.desafioandroid.R;
+import br.com.concretesolutions.desafioandroid.databinding.VMediaItemBinding;
 import br.com.concretesolutions.desafioandroid.databinding.VSeeMoreBinding;
-import br.com.concretesolutions.desafioandroid.ui.feature.MediaListActivity;
+import br.com.concretesolutions.desafioandroid.ui.feature.detail.MediaDetailActivity;
+import br.com.concretesolutions.desafioandroid.ui.feature.list.MediaListActivity;
 import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 
 public class HorizontalListAdapter extends BaseAdapter<MediaItemViewModel> {
@@ -35,15 +37,20 @@ public class HorizontalListAdapter extends BaseAdapter<MediaItemViewModel> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
         if (getItemViewType(position) == TYPE_SEE_MORE) {
             final VSeeMoreBinding binding = (VSeeMoreBinding) holder.binding;
             binding.getRoot().setOnClickListener(v -> {
-                        Context context = binding.getRoot().getContext();
+                        final Context context = binding.getRoot().getContext();
                         context.startActivity(MediaListActivity.intent(context));
                     }
             );
-        } else
-
-            super.onBindViewHolder(holder, position);
+        } else {
+            final VMediaItemBinding binding = (VMediaItemBinding) holder.binding;
+            binding.getRoot().setOnClickListener(v -> {
+                final Context context = binding.getRoot().getContext();
+                context.startActivity(MediaDetailActivity.intent(context));
+            });
+        }
     }
 }

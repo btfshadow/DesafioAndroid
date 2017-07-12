@@ -60,7 +60,8 @@ public class MediaFragment extends BaseFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBundle(STATE_ADAPTER, adapter.saveInstanceState());
+        if (adapter != null)
+            outState.putBundle(STATE_ADAPTER, adapter.saveInstanceState());
         super.onSaveInstanceState(outState);
     }
 

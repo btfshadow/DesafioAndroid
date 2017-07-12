@@ -22,17 +22,15 @@ public class TVShowsManager {
 
     @Retention(RetentionPolicy.CLASS)
     @IntDef({POPULAR, TOP_RATED, AIRING_TODAY, ON_THE_AUR})
-    public @interface TVCategoryType {
+    @interface TVCategoryType {
         int POPULAR = R.string.popular;
         int TOP_RATED = R.string.top_rated;
         int AIRING_TODAY = R.string.airing_today;
         int ON_THE_AUR = R.string.on_the_air;
     }
 
-    public static Observable<Page<Media>> get(@TVCategoryType int category) throws NoSuchMethodException {
+    public static Observable<Page<Media>> get(@TVCategoryType int category) {
         switch (category) {
-            default:
-                throw new NoSuchMethodException("This method does not exist in TVShowsManager");
             case POPULAR:
                 return getPopular();
             case TOP_RATED:
@@ -41,6 +39,8 @@ public class TVShowsManager {
                 return getAiringToday();
             case ON_THE_AUR:
                 return getOnTheAir();
+            default:
+                return getPopular();
         }
     }
 

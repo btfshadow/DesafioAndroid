@@ -10,7 +10,6 @@ import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 import io.reactivex.Observable
 
-
 fun movieEndpoints(server: RequestMatcherRule, func: MoviesEndpointsRobot.() -> Unit) = MoviesEndpointsRobot(server).apply { func() }
 
 class MoviesEndpointsRobot(private val server: RequestMatcherRule) {
