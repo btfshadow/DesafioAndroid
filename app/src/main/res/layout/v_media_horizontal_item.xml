@@ -12,7 +12,7 @@
         android:id="@+id/category_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/default_minor_margin">
+        android:paddingBottom="@dimen/small_margin">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -20,8 +20,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:clipToPadding="false"
-            android:paddingEnd="@dimen/default_minor_margin"
-            android:paddingStart="@dimen/default_minor_margin" />
+            android:paddingEnd="@dimen/small_margin"
+            android:paddingStart="@dimen/small_margin" />
 
         <ProgressBar
             android:id="@+id/loading"

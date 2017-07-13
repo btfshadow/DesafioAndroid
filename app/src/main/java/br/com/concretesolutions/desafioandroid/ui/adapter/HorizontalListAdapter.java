@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaItemBinding;
 import br.com.concretesolutions.desafioandroid.databinding.VSeeMoreBinding;
@@ -42,14 +44,14 @@ public class HorizontalListAdapter extends BaseAdapter<MediaItemViewModel> {
             final VSeeMoreBinding binding = (VSeeMoreBinding) holder.binding;
             binding.getRoot().setOnClickListener(v -> {
                         final Context context = binding.getRoot().getContext();
-                        context.startActivity(MediaListActivity.intent(context));
+                        context.startActivity(MediaListActivity.intent(context, (ArrayList<MediaItemViewModel>) getList()));
                     }
             );
         } else {
             final VMediaItemBinding binding = (VMediaItemBinding) holder.binding;
             binding.getRoot().setOnClickListener(v -> {
                 final Context context = binding.getRoot().getContext();
-                context.startActivity(MediaDetailActivity.intent(context));
+                context.startActivity(MediaDetailActivity.intent(context, getItem(position)));
             });
         }
     }

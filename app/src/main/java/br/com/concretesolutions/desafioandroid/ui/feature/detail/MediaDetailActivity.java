@@ -9,12 +9,13 @@ import android.support.annotation.NonNull;
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.AMediaDetailBinding;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity;
+import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 
 public class MediaDetailActivity extends BaseActivity {
 
     private AMediaDetailBinding binding;
 
-    public static Intent intent(@NonNull final Context context) {
+    public static Intent intent(@NonNull final Context context, MediaItemViewModel item) {
         return new Intent(context, MediaDetailActivity.class);
     }
 

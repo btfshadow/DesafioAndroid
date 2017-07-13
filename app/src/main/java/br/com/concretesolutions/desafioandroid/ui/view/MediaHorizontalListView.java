@@ -98,7 +98,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        int decorationSpace = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_4dp);
+        int decorationSpace = getContext().getResources().getDimensionPixelOffset(R.dimen.smallest_margin);
         binding.recyclerView.addItemDecoration(new CustomItemDecoration(decorationSpace));
         binding.recyclerView.setAdapter(adapter);
     }

@@ -13,7 +13,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_minor_margin"
+        android:layout_marginBottom="@dimen/small_margin"
         card_view:cardCornerRadius="0dp"
         card_view:cardElevation="4dp">
 
@@ -26,10 +26,10 @@
                 android:id="@+id/txt_category_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_minor_margin"
+                android:layout_marginBottom="@dimen/small_margin"
                 android:layout_marginStart="12dp"
                 android:textAllCaps="true"
-                android:layout_marginTop="@dimen/dimen_4dp"
+                android:layout_marginTop="@dimen/smallest_margin"
                 android:text="@{obj.categoryName}"
                 tools:text="Popular" />
 

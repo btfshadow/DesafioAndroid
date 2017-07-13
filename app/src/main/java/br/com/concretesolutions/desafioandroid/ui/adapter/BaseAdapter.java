@@ -114,6 +114,10 @@ public class BaseAdapter<T extends Parcelable> extends RecyclerView.Adapter<View
     public T getItem(int position) {
         return list.get(position);
     }
+
+    List<T> getList() {
+        return list;
+    }
     // endregion
 
     protected LayoutInflater getLayoutInflater(@NonNull final ViewGroup parent) {
