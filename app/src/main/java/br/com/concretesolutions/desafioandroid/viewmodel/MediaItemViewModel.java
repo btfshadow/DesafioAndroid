@@ -12,11 +12,13 @@ public class MediaItemViewModel implements Parcelable {
     private String title;
     private String rating;
     private String poster;
+    private String overview;
 
     public MediaItemViewModel(@NonNull final Media media) {
         this.title = media.title();
         this.rating = media.rating();
         this.poster = media.poster();
+        this.overview = media.overview();
     }
 
     public String getTitle() {
@@ -31,6 +33,11 @@ public class MediaItemViewModel implements Parcelable {
         return BuildConfig.BASE_IMAGE_URL + poster;
     }
 
+    public String getOverview() {
+        return overview;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -41,12 +48,14 @@ public class MediaItemViewModel implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.rating);
         dest.writeString(this.poster);
+        dest.writeString(this.overview);
     }
 
-    private MediaItemViewModel(Parcel in) {
+    protected MediaItemViewModel(Parcel in) {
         this.title = in.readString();
         this.rating = in.readString();
         this.poster = in.readString();
+        this.overview = in.readString();
     }
 
     public static final Creator<MediaItemViewModel> CREATOR = new Creator<MediaItemViewModel>() {
