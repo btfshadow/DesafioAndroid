@@ -10,18 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemBinding;
 import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
 import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 import br.com.concretesolutions.desafioandroid.manager.TVShowsManager;
-import br.com.concretesolutions.desafioandroid.ui.adapter.BaseAdapter;
+import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
-import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
@@ -32,7 +28,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private static final String STATE_ADAPTER = "STATE_ADAPTER_1";
 
     private VMediaHorizontalItemBinding binding;
-    private BaseAdapter<MediaItemViewModel> adapter;
+    private HorizontalListAdapter adapter;
     private CompositeDisposable subscriptions = new CompositeDisposable();
 
     public MediaHorizontalListView(@NonNull Context context) {
@@ -57,14 +53,11 @@ public class MediaHorizontalListView extends FrameLayout {
         if (obj == null)
             return;
 
-        try {
-            getMedia(obj.getCategoryName(), obj.getManagerType());
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        binding.setObj(obj);
+        getMedia(obj.getCategoryName(), obj.getManagerType());
     }
 
-    public void getMedia(int category, @MediaManagerType int managerType) throws NoSuchMethodException {
+    public void getMedia(int category, @MediaManagerType int managerType) {
         loading(true);
         error(false);
 
@@ -73,7 +66,7 @@ public class MediaHorizontalListView extends FrameLayout {
             observable = MoviesManager.get(category);
         else
             observable = TVShowsManager.get(category);
-            subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
+        subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
     }
 
     public void restoreInstanceState(final Bundle savedInstanceState) {
@@ -89,7 +82,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private void onMediaSuccess(final Page<Media> mediaPage) {
         loading(false);
         error(false);
-        adapter.setList(getViewModelList(mediaPage));
+        adapter.setList(CategoryViewModel.getViewModelList(mediaPage));
     }
 
     private void onMediaError(Throwable throwable) {
@@ -99,13 +92,13 @@ public class MediaHorizontalListView extends FrameLayout {
     }
 
     private void setupAdapter() {
-        adapter = new BaseAdapter<>(R.layout.v_media_item);
+        adapter = new HorizontalListAdapter();
     }
 
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        int decorationSpace= getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_4dp);
+        int decorationSpace = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_4dp);
         binding.recyclerView.addItemDecoration(new CustomItemDecoration(decorationSpace));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -117,19 +110,14 @@ public class MediaHorizontalListView extends FrameLayout {
 
     private void error(boolean show) {
         changeVisibility(binding.txtErrorView, show);
+        final CategoryViewModel obj = binding.getObj();
+        binding.txtErrorView.setOnClickListener(v -> {
+            getMedia(obj.getCategoryName(), obj.getManagerType());
+        });
     }
 
     private void changeVisibility(final View view, boolean show) {
         view.setVisibility(show ? View.VISIBLE : GONE);
-    }
-
-    private List<MediaItemViewModel> getViewModelList(final Page<Media> mediaPage) {
-        List<MediaItemViewModel> viewModelList = new ArrayList<>();
-
-        for (Media media : mediaPage.results())
-            viewModelList.add(new MediaItemViewModel(media));
-
-        return viewModelList;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package br.com.concretesolutions.repository.mock
+package br.com.concretesolutions.desafioandroid.mock
 
 import br.com.concretesolutions.requestmatcher.RequestMatcherRule
 

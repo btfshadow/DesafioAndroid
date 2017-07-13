@@ -116,7 +116,7 @@ public class BaseAdapter<T extends Parcelable> extends RecyclerView.Adapter<View
     }
     // endregion
 
-    private LayoutInflater getLayoutInflater(@NonNull final ViewGroup parent) {
+    protected LayoutInflater getLayoutInflater(@NonNull final ViewGroup parent) {
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(parent.getContext());
         return layoutInflater;

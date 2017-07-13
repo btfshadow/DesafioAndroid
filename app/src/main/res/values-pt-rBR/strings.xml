@@ -15,5 +15,6 @@
     <string name="category_item_error">Erro ao carregar, clique para tentar novamente</string>
     <string name="airing_today">Estréias</string>
     <string name="on_the_air">No ar</string>
+    <string name="see_more">Ver mais</string>
 
 </resources>

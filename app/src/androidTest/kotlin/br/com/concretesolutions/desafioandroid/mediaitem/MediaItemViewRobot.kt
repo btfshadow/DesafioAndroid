@@ -4,7 +4,7 @@ import android.support.annotation.DrawableRes
 import android.support.test.rule.ActivityTestRule
 import br.com.concretesolutions.desafioandroid.R
 import br.com.concretesolutions.desafioandroid.ViewTestActivity
-import br.com.concretesolutions.desafioandroid.mocks.MockObjects
+import br.com.concretesolutions.desafioandroid.mock.MockObjects
 import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel
 import br.com.concretesolutions.kappuccino.assertions.VisibilityAssertions.displayed
 import br.com.concretesolutions.kappuccino.utils.doWait

@@ -31,7 +31,6 @@ public class MediaItemViewModel implements Parcelable {
         return BuildConfig.BASE_IMAGE_URL + poster;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
