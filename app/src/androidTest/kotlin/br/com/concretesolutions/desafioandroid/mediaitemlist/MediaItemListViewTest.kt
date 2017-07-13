@@ -27,8 +27,8 @@ class MediaItemListViewTest : BaseViewTest<MediaItemViewModel>(R.layout.v_media_
         doWait(300L)
     }
 
-    private fun itemListViewModel(): MediaItemListViewModel {
-        return MediaItemListViewModel(MockObjects.mediaItem())
+    private fun itemListViewModel(): MediaItemViewModel {
+        return MediaItemViewModel(MockObjects.mediaItem())
     }
 
 }
