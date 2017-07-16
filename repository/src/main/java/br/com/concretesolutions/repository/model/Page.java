@@ -14,6 +14,12 @@ public final class Page<T> {
     @SerializedName("total_pages")
     @Expose private int totalPages;
 
+    public Page(List<T> list, int page, int totalPages) {
+        this.results = list;
+        this.page = page;
+        this.totalPages = totalPages;
+    }
+
     public List<T> results() {
         return results;
     }

@@ -14,53 +14,53 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import static br.com.concretesolutions.desafioandroid.manager.TVShowsManager.TVCategoryType.AIRING_TODAY;
-import static br.com.concretesolutions.desafioandroid.manager.TVShowsManager.TVCategoryType.ON_THE_AUR;
+import static br.com.concretesolutions.desafioandroid.manager.TVShowsManager.TVCategoryType.ON_THE_AIR;
 import static br.com.concretesolutions.desafioandroid.manager.TVShowsManager.TVCategoryType.POPULAR;
 import static br.com.concretesolutions.desafioandroid.manager.TVShowsManager.TVCategoryType.TOP_RATED;
 
 public class TVShowsManager {
 
     @Retention(RetentionPolicy.CLASS)
-    @IntDef({POPULAR, TOP_RATED, AIRING_TODAY, ON_THE_AUR})
-    @interface TVCategoryType {
+    @IntDef({POPULAR, TOP_RATED, AIRING_TODAY, ON_THE_AIR})
+    public @interface TVCategoryType {
         int POPULAR = R.string.popular;
         int TOP_RATED = R.string.top_rated;
         int AIRING_TODAY = R.string.airing_today;
-        int ON_THE_AUR = R.string.on_the_air;
+        int ON_THE_AIR = R.string.on_the_air;
     }
 
-    public static Observable<Page<Media>> get(@TVCategoryType int category) {
+    public static Observable<Page<Media>> get(@TVCategoryType int category, int page) throws NoSuchMethodException {
         switch (category) {
             case POPULAR:
-                return getPopular();
+                return getPopular(page);
             case TOP_RATED:
-                return getTopRated();
+                return getTopRated(page);
             case AIRING_TODAY:
-                return getAiringToday();
-            case ON_THE_AUR:
-                return getOnTheAir();
+                return getAiringToday(page);
+            case ON_THE_AIR:
+                return getOnTheAir(page);
             default:
-                return getPopular();
+                throw new NoSuchMethodException("There is no category type " + category + " in TVShowsManager");
         }
     }
 
-    private static Observable<Page<Media>> getPopular() {
-        return TVShowsRepository.popular(LanguageType.PT_BR, 1)
+    private static Observable<Page<Media>> getPopular(int page) {
+        return TVShowsRepository.popular(LanguageType.PT_BR, page)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getTopRated() {
-        return TVShowsRepository.topRated(LanguageType.PT_BR, 1)
+    private static Observable<Page<Media>> getTopRated(int page) {
+        return TVShowsRepository.topRated(LanguageType.PT_BR, page)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getAiringToday() {
-        return TVShowsRepository.airingToday(LanguageType.PT_BR, 1)
+    private static Observable<Page<Media>> getAiringToday(int page) {
+        return TVShowsRepository.airingToday(LanguageType.PT_BR, page)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getOnTheAir() {
-        return TVShowsRepository.onTheAir(LanguageType.PT_BR, 1)
+    private static Observable<Page<Media>> getOnTheAir(int page) {
+        return TVShowsRepository.onTheAir(LanguageType.PT_BR, page)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }
