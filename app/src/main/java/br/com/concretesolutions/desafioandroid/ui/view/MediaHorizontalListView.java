@@ -13,8 +13,6 @@ import android.widget.FrameLayout;
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemBinding;
 import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
-import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
-import br.com.concretesolutions.desafioandroid.manager.TVShowsManager;
 import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
@@ -22,6 +20,8 @@ import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+
+import static br.com.concretesolutions.desafioandroid.manager.MediaManagerTypeHandler.getManagerObservable;
 
 public class MediaHorizontalListView extends FrameLayout {
 
@@ -54,19 +54,22 @@ public class MediaHorizontalListView extends FrameLayout {
             return;
 
         binding.setObj(obj);
-        getMedia(obj.getCategoryName(), obj.getManagerType());
+        adapter.setCategoryViewModel(obj);
+        getMedia(obj.getManagerType(), obj.getCategoryName());
     }
 
-    public void getMedia(int category, @MediaManagerType int managerType) {
+    public void getMedia(@MediaManagerType int managerType, int category) {
         loading(true);
         error(false);
 
-        Observable<Page<Media>> observable;
-        if (managerType == MediaManagerType.MOVIE)
-            observable = MoviesManager.get(category);
-        else
-            observable = TVShowsManager.get(category);
-        subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
+        int firstPage = 1;
+        final Observable<Page<Media>> observable;
+        try {
+            observable = getManagerObservable(managerType, category, firstPage);
+            subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
     public void restoreInstanceState(final Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class MediaHorizontalListView extends FrameLayout {
     private void onMediaSuccess(final Page<Media> mediaPage) {
         loading(false);
         error(false);
+        adapter.setMediaPage(mediaPage);
         adapter.setList(CategoryViewModel.getViewModelList(mediaPage));
     }
 
@@ -111,9 +115,9 @@ public class MediaHorizontalListView extends FrameLayout {
     private void error(boolean show) {
         changeVisibility(binding.txtErrorView, show);
         final CategoryViewModel obj = binding.getObj();
-        binding.txtErrorView.setOnClickListener(v -> {
-            getMedia(obj.getCategoryName(), obj.getManagerType());
-        });
+        binding.txtErrorView.setOnClickListener(v ->
+                getMedia(obj.getManagerType(), obj.getCategoryName())
+        );
     }
 
     private void changeVisibility(final View view, boolean show) {

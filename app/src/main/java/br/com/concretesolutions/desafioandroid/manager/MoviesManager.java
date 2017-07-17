@@ -26,45 +26,45 @@ public class MoviesManager {
 
     @Retention(RetentionPolicy.CLASS)
     @IntDef({POPULAR, TOP_RATED, NOW_PLAYING, UP_COMING})
-    @interface MovieCategoryType {
+    public @interface MovieCategoryType {
         int POPULAR = R.string.popular;
         int TOP_RATED = R.string.top_rated;
         int NOW_PLAYING = R.string.now_playing;
         int UP_COMING = R.string.up_coming;
     }
 
-    public static Observable<Page<Media>> get(@MovieCategoryType int category) {
+    public static Observable<Page<Media>> get(@MovieCategoryType int category, int page) throws NoSuchMethodException {
         switch (category) {
             case POPULAR:
-                return getPopular();
+                return getPopular(page);
             case TOP_RATED:
-                return getTopRated();
+                return getTopRated(page);
             case NOW_PLAYING:
-                return getNowPlaying();
+                return getNowPlaying(page);
             case UP_COMING:
-                return getUpComing();
+                return getUpComing(page);
             default:
-                return getPopular();
+                throw new NoSuchMethodException("There is no category type " + category + " in MoviesManager");
         }
     }
 
-    private static Observable<Page<Media>> getPopular() {
-        return MoviesRepository.popular(LanguageType.PT_BR, 1, RegionType.BR)
+    private static Observable<Page<Media>> getPopular(int page) {
+        return MoviesRepository.popular(LanguageType.PT_BR, page, RegionType.BR)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getNowPlaying() {
-        return MoviesRepository.nowPlaying(LanguageType.PT_BR, 1, RegionType.BR)
+    private static Observable<Page<Media>> getNowPlaying(int page) {
+        return MoviesRepository.nowPlaying(LanguageType.PT_BR, page, RegionType.BR)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getTopRated() {
-        return MoviesRepository.topRated(LanguageType.PT_BR, 1, RegionType.BR)
+    private static Observable<Page<Media>> getTopRated(int page) {
+        return MoviesRepository.topRated(LanguageType.PT_BR, page, RegionType.BR)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static Observable<Page<Media>> getUpComing() {
-        return MoviesRepository.upComing(LanguageType.PT_BR, 1, RegionType.BR)
+    private static Observable<Page<Media>> getUpComing(int page) {
+        return MoviesRepository.upComing(LanguageType.PT_BR, page, RegionType.BR)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }
