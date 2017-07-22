@@ -8,33 +8,22 @@ import br.com.concretesolutions.requestmatcher.model.HttpMethod
 class MovieRequestMock(private val server: RequestMatcherRule) {
 
     fun nowPlaying(code: RequestMock.Code): RequestMatchersGroup {
-        when (code) {
-            SUCCESS -> return successMovieList()
-            ERROR -> return errorResponse()
-            EMPTY -> TODO()
-            NOT_FOUND -> return errorNotFound()
-        }
+        return handleResponseCode(code).pathIs("/movie/nowPlaying")
     }
 
     fun popular(code: RequestMock.Code): RequestMatchersGroup {
-        when (code) {
-            SUCCESS -> return successMovieList()
-            ERROR -> return errorResponse()
-            EMPTY -> TODO()
-            NOT_FOUND -> return errorNotFound()
-        }
+        return handleResponseCode(code).pathIs("/movie/popular")
     }
 
     fun topRated(code: RequestMock.Code): RequestMatchersGroup {
-        when (code) {
-            SUCCESS -> return successMovieList()
-            ERROR -> return errorResponse()
-            EMPTY -> TODO()
-            NOT_FOUND -> return errorNotFound()
-        }
+        return handleResponseCode(code).pathIs("/movie/topRated")
     }
 
     fun upComing(code: RequestMock.Code): RequestMatchersGroup {
+        return handleResponseCode(code).pathIs("/movie/upComing")
+    }
+
+    private fun handleResponseCode(code: RequestMock.Code): RequestMatchersGroup {
         when (code) {
             SUCCESS -> return successMovieList()
             ERROR -> return errorResponse()
@@ -42,7 +31,6 @@ class MovieRequestMock(private val server: RequestMatcherRule) {
             NOT_FOUND -> return errorNotFound()
         }
     }
-
     private fun successMovieList(): RequestMatchersGroup {
         return server.addFixture(200, "movie_page_200.json")
                 .ifRequestMatches()
