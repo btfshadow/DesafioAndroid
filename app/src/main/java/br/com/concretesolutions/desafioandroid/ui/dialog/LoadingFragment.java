@@ -40,7 +40,7 @@ public class LoadingFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.LoadingFragment);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_Desafio_LoadingFragment);
     }
 
     @Nullable

@@ -1,20 +1,15 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="Theme.Desafio.CollapsingToolbar" parent="">
+        <item name="contentScrim">?attr/colorPrimary</item>
+        <item name="expandedTitleGravity">top</item>
+        <item name="expandedTitleMarginStart">@dimen/default_margin</item>
+        <item name="expandedTitleMarginTop">140dp</item>
+        <item name="scrimVisibleHeightTrigger">140dp</item>
     </style>
 
-    <style name="LoadingFragment" parent="@style/AppTheme">
-        <!-- title encapsulating main part (background) of custom alertdialog -->
-        <item name="android:windowFrame">@android:color/transparent</item>
-        <!-- turn off any drawable used to draw a frame on the window -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- turn off any drawable used to draw a frame on the window -->
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowContentOverlay">@android:color/transparent</item>
-        <item name="android:windowNoTitle">false</item>
+    <style name="Theme.Desafio.CollapsingToolbarImage" parent="">
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
 </resources>

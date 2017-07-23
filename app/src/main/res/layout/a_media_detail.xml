@@ -1,10 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="obj"
+            type="br.com.concretesolutions.repository.model.Media" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:layout_marginTop="-24dp"
+            android:background="@color/transparent">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                style="@style/Theme.Desafio.CollapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <ImageView
+                    android:id="@+id/app_bar_image"
+                    style="@style/Theme.Desafio.CollapsingToolbarImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:backdrop='@{"https://image.tmdb.org/t/p/w500" + obj.backdrop()}'
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.75" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="24dp"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_arrow_back" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="DASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSADDASDSADSAD" />
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
