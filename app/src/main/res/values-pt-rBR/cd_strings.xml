@@ -2,4 +2,5 @@
 <resources>
     <!-- Content Description -->
     <string name="cd_media_poster">Cartaz</string>
+    <string name="cd_media_backdrop">Banner</string>
 </resources>
