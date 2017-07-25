@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Media implements Parcelable{
+public class Media implements Parcelable {
 
     @SerializedName(value = "title", alternate = {"name"})
     private String title;

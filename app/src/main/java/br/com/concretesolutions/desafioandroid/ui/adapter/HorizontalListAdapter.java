@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaItemBinding;
 import br.com.concretesolutions.desafioandroid.databinding.VSeeMoreBinding;
-import br.com.concretesolutions.desafioandroid.ui.feature.detail.MediaDetailActivity;
 import br.com.concretesolutions.desafioandroid.ui.feature.list.MediaListActivity;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
 import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
@@ -55,7 +54,7 @@ public class HorizontalListAdapter extends BaseAdapter<MediaItemViewModel> {
 
     private void startMediaDetailsActivity(int position, VMediaItemBinding binding) {
         final Context context = binding.getRoot().getContext();
-        context.startActivity(MediaDetailActivity.intent(context, getItem(position)));
+//        context.startActivity(MediaDetailActivity.intent(context, getItem(position)));
     }
 
     private void startMediaListActivity(VSeeMoreBinding binding) {
