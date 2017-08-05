@@ -6,9 +6,11 @@
 
         <import type="android.text.TextUtils"/>
 
+        <import type="br.com.concretesolutions.repository.BuildConfig"/>
+
         <variable
             name="obj"
-            type="br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel" />
+            type="br.com.concretesolutions.repository.model.Media" />
     </data>
 
     <LinearLayout
@@ -23,7 +25,7 @@
             android:layout_height="192dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/cd_media_poster"
-            android:src="@{obj.poster}"
+            android:src='@{TextUtils.isEmpty(obj.poster) ? "" : BuildConfig.BASE_IMAGE_URL + obj.poster}'
             tools:src="@drawable/ic_image_placeholder"/>
 
         <TextView

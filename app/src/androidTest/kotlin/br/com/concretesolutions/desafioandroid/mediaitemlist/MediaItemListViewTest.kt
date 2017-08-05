@@ -4,15 +4,15 @@ import android.support.test.runner.AndroidJUnit4
 import br.com.concretesolutions.desafioandroid.R
 import br.com.concretesolutions.desafioandroid.base.BaseViewTest
 import br.com.concretesolutions.desafioandroid.mock.MockObjects
-import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel
 import br.com.concretesolutions.kappuccino.assertions.VisibilityAssertions.displayed
 import br.com.concretesolutions.kappuccino.utils.doWait
+import br.com.concretesolutions.repository.model.Media
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MediaItemListViewTest : BaseViewTest<MediaItemViewModel>(R.layout.v_media_list_item) {
+class MediaItemListViewTest : BaseViewTest<Media>(R.layout.v_media_list_item) {
 
     @Test
     fun overView_isVisible() {
@@ -23,12 +23,10 @@ class MediaItemListViewTest : BaseViewTest<MediaItemViewModel>(R.layout.v_media_
 
     @Before
     fun setUp() {
-        rule.activity.setObj(itemListViewModel())
+        rule.activity.setObj(mediaItemList())
         doWait(300L)
     }
 
-    private fun itemListViewModel(): MediaItemViewModel {
-        return MediaItemViewModel(MockObjects.mediaItem())
-    }
+    private fun mediaItemList() = MockObjects.mediaItem()
 
 }

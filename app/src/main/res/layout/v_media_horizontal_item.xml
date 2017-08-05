@@ -5,7 +5,7 @@
 
         <variable
             name="obj"
-            type="br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel" />
+            type="br.com.concretesolutions.repository.model.MediaType" />
     </data>
 
     <FrameLayout

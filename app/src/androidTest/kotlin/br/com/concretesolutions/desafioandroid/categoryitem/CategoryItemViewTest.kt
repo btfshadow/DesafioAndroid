@@ -3,17 +3,17 @@ package br.com.concretesolutions.desafioandroid.categoryitem
 import android.support.test.runner.AndroidJUnit4
 import br.com.concretesolutions.desafioandroid.R
 import br.com.concretesolutions.desafioandroid.base.BaseViewTest
-import br.com.concretesolutions.desafioandroid.manager.MediaManagerType.MOVIE
+import br.com.concretesolutions.repository.model.MediaTypes.MOVIE
 import br.com.concretesolutions.desafioandroid.mock.RequestMock.Code.ERROR
 import br.com.concretesolutions.desafioandroid.mock.RequestMock.Code.SUCCESS
 import br.com.concretesolutions.desafioandroid.mock.mockRequest
-import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel
+import br.com.concretesolutions.repository.model.MediaType
 import br.com.concretesolutions.kappuccino.assertions.VisibilityAssertions.displayed
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CategoryItemViewTest : BaseViewTest<CategoryViewModel>(R.layout.v_category_item, launch = false, obj = CategoryViewModel(R.string.popular, MOVIE)) {
+class CategoryItemViewTest : BaseViewTest<MediaType>(R.layout.v_category_item, launch = false, obj = MediaType(R.string.popular, MOVIE)) {
 
     @Test
     fun categoryTitle_isVisible() {

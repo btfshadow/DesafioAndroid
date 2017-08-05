@@ -1,4 +1,4 @@
-package br.com.concretesolutions.desafioandroid.ui.feature;
+package br.com.concretesolutions.desafioandroid.ui.feature.media;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -15,16 +15,16 @@ import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.FMediaBinding;
 import br.com.concretesolutions.desafioandroid.ui.adapter.BaseAdapter;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseFragment;
-import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
+import br.com.concretesolutions.repository.model.MediaType;
 
 public class MediaFragment extends BaseFragment {
 
     private static final String STATE_ADAPTER = "STATE_ADAPTER_0";
     private static final String VIEW_MODEL_LIST_KEY = "VIEW_MODEL_LIST_KEY";
     private FMediaBinding binding;
-    private BaseAdapter<CategoryViewModel> adapter;
+    private BaseAdapter<MediaType> adapter;
 
-    public static MediaFragment newInstance(@NonNull final ArrayList<CategoryViewModel> viewModelList) {
+    public static MediaFragment newInstance(@NonNull final ArrayList<MediaType> viewModelList) {
         Bundle args = new Bundle();
         args.putParcelableArrayList(VIEW_MODEL_LIST_KEY, viewModelList);
         MediaFragment fragment = new MediaFragment();
@@ -46,7 +46,7 @@ public class MediaFragment extends BaseFragment {
         adapter = new BaseAdapter<>(R.layout.v_category_item);
         if (savedInstanceState != null)
             adapter.restoreInstanceState(savedInstanceState.getBundle(STATE_ADAPTER));
-        final ArrayList<CategoryViewModel> viewModelList = getArguments().getParcelableArrayList(VIEW_MODEL_LIST_KEY);
+        final ArrayList<MediaType> viewModelList = getArguments().getParcelableArrayList(VIEW_MODEL_LIST_KEY);
         if (viewModelList != null)
             //noinspection unchecked
             adapter.setList(viewModelList);

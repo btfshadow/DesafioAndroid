@@ -4,19 +4,20 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import br.com.concretesolutions.desafioandroid.R;
-import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
+import br.com.concretesolutions.repository.model.MediaTypes;
 import br.com.concretesolutions.desafioandroid.manager.MoviesManager;
 import br.com.concretesolutions.desafioandroid.manager.TVShowsManager;
+import br.com.concretesolutions.repository.model.MediaType;
 
 public final class MediaStringHelper {
 
-    public static String getTextForMedia(@NonNull final Context context, @MediaManagerType int type, int category) {
+    public static String getTextForMedia(@NonNull final Context context, final MediaType mediaType) {
         String text;
-        if (type == MediaManagerType.MOVIE) {
-            text = getMovieCategoryText(context, category);
+        if (mediaType.getType() == MediaTypes.MOVIE) {
+            text = getMovieCategoryText(context, mediaType.getCategoryName());
             text = text + " " + context.getString(R.string.movies).toLowerCase();
         } else {
-            text = getTvShowsCategoryText(context, category);
+            text = getTvShowsCategoryText(context, mediaType.getCategoryName());
             text = text + " " + context.getString(R.string.tv_shows).toLowerCase();
         }
 
