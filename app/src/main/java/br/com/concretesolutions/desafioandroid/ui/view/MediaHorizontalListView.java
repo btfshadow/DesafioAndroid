@@ -1,6 +1,7 @@
 package br.com.concretesolutions.desafioandroid.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemB
 import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
 import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
+import br.com.concretesolutions.desafioandroid.ui.feature.detail.MediaDetailActivity;
+import br.com.concretesolutions.desafioandroid.ui.feature.list.MediaListActivity;
 import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
@@ -23,13 +26,14 @@ import io.reactivex.disposables.CompositeDisposable;
 
 import static br.com.concretesolutions.desafioandroid.manager.MediaManagerTypeHandler.getManagerObservable;
 
-public class MediaHorizontalListView extends FrameLayout {
+public class MediaHorizontalListView extends FrameLayout implements HorizontalListAdapter.HorizontalListClickListener {
 
     private static final String STATE_ADAPTER = "STATE_ADAPTER_1";
 
     private VMediaHorizontalItemBinding binding;
     private HorizontalListAdapter adapter;
     private CompositeDisposable subscriptions = new CompositeDisposable();
+    private Page<Media> mediaPage;
 
     public MediaHorizontalListView(@NonNull Context context) {
         super(context);
@@ -54,7 +58,6 @@ public class MediaHorizontalListView extends FrameLayout {
             return;
 
         binding.setObj(obj);
-        adapter.setCategoryViewModel(obj);
         getMedia(obj.getManagerType(), obj.getCategoryName());
     }
 
@@ -85,8 +88,8 @@ public class MediaHorizontalListView extends FrameLayout {
     private void onMediaSuccess(final Page<Media> mediaPage) {
         loading(false);
         error(false);
-        adapter.setMediaPage(mediaPage);
-        adapter.setList(CategoryViewModel.getViewModelList(mediaPage));
+        this.mediaPage = mediaPage;
+        adapter.setList(mediaPage.results());
     }
 
     private void onMediaError(Throwable throwable) {
@@ -95,8 +98,20 @@ public class MediaHorizontalListView extends FrameLayout {
         throwable.printStackTrace();
     }
 
+    @Override
+    public void onSeeMoreClick() {
+        final CategoryViewModel obj = binding.getObj();
+        final Intent intent = MediaListActivity.intent(getContext(), mediaPage, obj.getManagerType(), obj.getCategoryName());
+        getContext().startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(@NonNull Media media) {
+        getContext().startActivity(MediaDetailActivity.intent(getContext(), media));
+    }
+
     private void setupAdapter() {
-        adapter = new HorizontalListAdapter();
+        adapter = new HorizontalListAdapter(this);
     }
 
     private void setupRecyclerView() {
