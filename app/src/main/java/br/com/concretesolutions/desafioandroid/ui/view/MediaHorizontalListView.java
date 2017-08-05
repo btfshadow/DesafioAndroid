@@ -13,18 +13,17 @@ import android.widget.FrameLayout;
 
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemBinding;
-import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
 import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
 import br.com.concretesolutions.desafioandroid.ui.feature.detail.MediaDetailActivity;
 import br.com.concretesolutions.desafioandroid.ui.feature.list.MediaListActivity;
-import br.com.concretesolutions.desafioandroid.viewmodel.CategoryViewModel;
+import br.com.concretesolutions.repository.model.MediaType;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
-import static br.com.concretesolutions.desafioandroid.manager.MediaManagerTypeHandler.getManagerObservable;
+import static br.com.concretesolutions.desafioandroid.manager.MediaTypeManager.getMediaObservable;
 
 public class MediaHorizontalListView extends FrameLayout implements HorizontalListAdapter.HorizontalListClickListener {
 
@@ -53,22 +52,22 @@ public class MediaHorizontalListView extends FrameLayout implements HorizontalLi
         setupRecyclerView();
     }
 
-    public void setObj(@Nullable CategoryViewModel obj) {
+    public void setObj(@Nullable MediaType obj) {
         if (obj == null)
             return;
 
         binding.setObj(obj);
-        getMedia(obj.getManagerType(), obj.getCategoryName());
+        getMediaData(obj);
     }
 
-    public void getMedia(@MediaManagerType int managerType, int category) {
+    public void getMediaData(final MediaType mediaType) {
         loading(true);
         error(false);
 
         int firstPage = 1;
         final Observable<Page<Media>> observable;
         try {
-            observable = getManagerObservable(managerType, category, firstPage);
+            observable = getMediaObservable(mediaType, firstPage);
             subscriptions.add(observable.subscribe(this::onMediaSuccess, this::onMediaError));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -100,8 +99,8 @@ public class MediaHorizontalListView extends FrameLayout implements HorizontalLi
 
     @Override
     public void onSeeMoreClick() {
-        final CategoryViewModel obj = binding.getObj();
-        final Intent intent = MediaListActivity.intent(getContext(), mediaPage, obj.getManagerType(), obj.getCategoryName());
+        final MediaType obj = binding.getObj();
+        final Intent intent = MediaListActivity.intent(getContext(), mediaPage, obj);
         getContext().startActivity(intent);
     }
 
@@ -126,13 +125,10 @@ public class MediaHorizontalListView extends FrameLayout implements HorizontalLi
         changeVisibility(binding.loading, show);
     }
 
-
     private void error(boolean show) {
         changeVisibility(binding.txtErrorView, show);
-        final CategoryViewModel obj = binding.getObj();
-        binding.txtErrorView.setOnClickListener(v ->
-                getMedia(obj.getManagerType(), obj.getCategoryName())
-        );
+        final MediaType obj = binding.getObj();
+        binding.txtErrorView.setOnClickListener(v -> getMediaData(obj));
     }
 
     private void changeVisibility(final View view, boolean show) {

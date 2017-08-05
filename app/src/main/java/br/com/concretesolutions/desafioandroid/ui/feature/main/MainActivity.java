@@ -9,8 +9,8 @@ import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.AMainBinding;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseFragment;
-import br.com.concretesolutions.desafioandroid.ui.feature.MediaFragment;
-import br.com.concretesolutions.desafioandroid.ui.feature.MediaCategoriesBuilder;
+import br.com.concretesolutions.desafioandroid.ui.feature.media.MediaFragment;
+import br.com.concretesolutions.desafioandroid.ui.feature.media.MediaCategoriesBuilder;
 import br.com.concretesolutions.desafioandroid.ui.feature.profile.ProfileFragment;
 import br.com.concretesolutions.desafioandroid.ui.util.FragmentUtils;
 
