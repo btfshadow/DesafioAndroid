@@ -15,7 +15,7 @@ class MediaDetailTest: BaseActivityTest<MediaDetailActivity>(false, MediaDetailA
     @Test
     fun testInitial() {
         launch()
-        doWait(30000L)
+        doWait(3000L)
     }
 
     override fun intent(): Intent {

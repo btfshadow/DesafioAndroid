@@ -3,12 +3,12 @@ package br.com.concretesolutions.desafioandroid.mediaitem
 import android.support.test.runner.AndroidJUnit4
 import br.com.concretesolutions.desafioandroid.R
 import br.com.concretesolutions.desafioandroid.base.BaseViewTest
-import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel
+import br.com.concretesolutions.repository.model.Media
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MediaItemViewTest : BaseViewTest<MediaItemViewModel>(R.layout.v_media_item) {
+class MediaItemViewTest : BaseViewTest<Media>(R.layout.v_media_item) {
 
     @Test
     fun whenDataIsOk_allViewsAreVisible() {
@@ -27,15 +27,6 @@ class MediaItemViewTest : BaseViewTest<MediaItemViewModel>(R.layout.v_media_item
             noPoster()
         } areVisible {
             posterError()
-        }
-    }
-
-    @Test
-    fun whenErrorLoadingPoster_showReloadImage() {
-        mediaItem(rule) {
-            errorLoadingPoster()
-        } areVisible {
-            reloadPoster()
         }
     }
 

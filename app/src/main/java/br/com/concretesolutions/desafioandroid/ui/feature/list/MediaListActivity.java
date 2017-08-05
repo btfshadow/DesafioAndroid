@@ -17,7 +17,6 @@ import br.com.concretesolutions.desafioandroid.manager.MediaManagerType;
 import br.com.concretesolutions.desafioandroid.ui.adapter.PaginationAdapter;
 import br.com.concretesolutions.desafioandroid.ui.base.BaseActivity;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
-import br.com.concretesolutions.desafioandroid.viewmodel.MediaItemViewModel;
 import br.com.concretesolutions.repository.model.Media;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,7 +35,7 @@ public class MediaListActivity extends BaseActivity {
     private List<Media> mediaList;
     private int totalPages;
     private CompositeDisposable subscriptions = new CompositeDisposable();
-    private PaginationAdapter<MediaItemViewModel> adapter;
+    private PaginationAdapter<Media> adapter;
     private @MediaManagerType int managerType;
     private int category;
 
@@ -82,11 +81,11 @@ public class MediaListActivity extends BaseActivity {
             }
         });
         final Page<Media> mediaPage = new Page<>(mediaList, 1, totalPages);
-        adapter.addPage(toViewModelPage(mediaPage));
+        adapter.addPage(mediaPage);
     }
 
     private void onMediaSuccess(final Page<Media> mediaPage) {
-        adapter.addPage(toViewModelPage(mediaPage));
+        adapter.addPage(mediaPage);
     }
 
     private void onMediaError(Throwable throwable) {
@@ -100,10 +99,5 @@ public class MediaListActivity extends BaseActivity {
         int decorationSpace = getResources().getDimensionPixelOffset(R.dimen.smallest_margin);
         binding.recyclerView.addItemDecoration(new CustomItemDecoration(decorationSpace));
         binding.recyclerView.setAdapter(adapter);
-    }
-
-    private Page<MediaItemViewModel> toViewModelPage(final Page<Media> mediaPage) {
-        final List<MediaItemViewModel> viewModelList = MediaItemViewModel.getViewModelList(mediaPage);
-        return new Page<>(viewModelList, mediaPage.page(), mediaPage.totalPages());
     }
 }

@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="br.com.concretesolutions.repository.BuildConfig" />
+
         <variable
             name="obj"
             type="br.com.concretesolutions.repository.model.Media" />
@@ -33,7 +35,7 @@
                     style="@style/Theme.Desafio.CollapsingToolbarImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:backdrop='@{"https://image.tmdb.org/t/p/w500" + obj.backdrop()}'
+                    app:backdrop='@{BuildConfig.BASE_IMAGE_URL + obj.backdrop()}'
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.75" />
 
