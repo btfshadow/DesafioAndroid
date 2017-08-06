@@ -1,28 +1,26 @@
 package br.com.concretesolutions.repository.robots
 
-import br.com.concretesolutions.repository.api.MoviesApi
+import br.com.concretesolutions.repository.api.MediaApi
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
-import br.com.concretesolutions.repository.model.Movie
+import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
+import br.com.concretesolutions.repository.mock.mockRequest
+import br.com.concretesolutions.repository.model.Media
 import br.com.concretesolutions.repository.model.Page
-import br.com.concretesolutions.repository.utils.errorMessage
-import br.com.concretesolutions.repository.utils.languageParam
-import br.com.concretesolutions.repository.utils.regionParam
-import br.com.concretesolutions.repository.utils.requestEndpoint
-import org.junit.Assert
-import retrofit2.Call
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
+import io.reactivex.Observable
 
-fun movieEndpoints(func: MoviesEndpointsRobot.() -> Unit) = MoviesEndpointsRobot().apply { func() }
+fun movieEndpoints(server: RequestMatcherRule, func: MoviesEndpointsRobot.() -> Unit) = MoviesEndpointsRobot(server).apply { func() }
 
-class MoviesEndpointsRobot {
+class MoviesEndpointsRobot(private val server: RequestMatcherRule) {
 
     @RegionType private var region = RegionType.BR
     private var page: Int = 0
     @LanguageType private var lang = LanguageType.PT_BR
 
     infix fun build(func: MoviesEndpointsResult.() -> Unit): MoviesEndpointsResult {
-        val movies = MoviesApi.get().getPopularMovies(lang, page, region)
-        return MoviesEndpointsResult(movies).apply { func() }
+        val movies = MediaApi.get().getPopularMovies(lang, page, region)
+        return MoviesEndpointsResult(server, movies).apply { func() }
     }
 
     fun language(@LanguageType language: String): MoviesEndpointsRobot {
@@ -36,17 +34,38 @@ class MoviesEndpointsRobot {
     }
 }
 
-class MoviesEndpointsResult(private val movies: Call<Page<Movie>>) {
+class MoviesEndpointsResult(private val server: RequestMatcherRule, private val movies: Observable<Page<Media>>) {
     fun languageIs(language: String) {
-        Assert.assertEquals(errorMessage("Language"), languageParam(movies.request()), language)
+        mockRequest(server)
+        {
+            movies {
+                popular(SUCCESS)
+                        .queriesContain("language", language)
+            }
+        }
+        movies.blockingFirst()
     }
 
     fun regionIs(region: String) {
-        Assert.assertEquals(errorMessage("Region"), regionParam(movies.request()), region)
+        mockRequest(server)
+        {
+            movies {
+                popular(SUCCESS)
+                        .queriesContain("region", region)
+            }
+        }
+        movies.blockingFirst()
     }
 
     fun endpointIs(endpoint: String) {
-        Assert.assertEquals(errorMessage("Endpoint"), requestEndpoint(movies.request()), endpoint)
+        mockRequest(server)
+        {
+            movies {
+                popular(SUCCESS)
+                        .pathIs(endpoint)
+            }
+        }
+        movies.blockingFirst()
     }
 }
 

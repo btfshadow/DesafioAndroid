@@ -4,29 +4,31 @@ import br.com.concretesolutions.repository.MoviesRepository
 import br.com.concretesolutions.repository.api.endpoint.MovieEndpoints.*
 import br.com.concretesolutions.repository.api.type.LanguageType
 import br.com.concretesolutions.repository.api.type.RegionType
-import br.com.concretesolutions.repository.mock.request.RequestMock.Code.SUCCESS
-import br.com.concretesolutions.repository.mock.request.mockRequest
+import br.com.concretesolutions.repository.mock.RequestMock.Code.SUCCESS
+import br.com.concretesolutions.repository.mock.mockRequest
+import br.com.concretesolutions.repository.model.Media
+import br.com.concretesolutions.repository.model.Page
 import br.com.concretesolutions.repository.robots.MoviesRepositoryRobot.RequestedEndpoint.*
-import br.com.concretesolutions.repository.utils.errorMessage
-import okhttp3.mockwebserver.MockWebServer
-import org.junit.Assert.assertEquals
+import br.com.concretesolutions.requestmatcher.RequestMatcherRule
+import br.com.concretesolutions.requestmatcher.RequestMatchersGroup
+import io.reactivex.Observable
 
-internal fun moviesRepository(server: MockWebServer, func: MoviesRepositoryRobot.() -> Unit): MoviesRepositoryRobot {
+internal fun moviesRepository(server: RequestMatcherRule, func: MoviesRepositoryRobot.() -> Unit): MoviesRepositoryRobot {
     return MoviesRepositoryRobot(server).apply { func() }
 }
 
-class MoviesRepositoryRobot(private val server: MockWebServer) {
+class MoviesRepositoryRobot(val server: RequestMatcherRule) {
 
     //region  Variables
     @RegionType private var region = RegionType.BR
     private var page: Int = 1
     @LanguageType private var lang = LanguageType.PT_BR
+    private var requestMatcher: RequestMatchersGroup? = null
     enum class RequestedEndpoint(val endpointCode: Int) {
         NOW_PLAYING(0),
-        LATEST(1),
-        POPULAR(2),
-        TOP_RATED(3),
-        UP_COMING(4)
+        POPULAR(1),
+        TOP_RATED(2),
+        UP_COMING(3)
     }
 
     var requestedEndpoint: RequestedEndpoint = NOW_PLAYING
@@ -36,7 +38,7 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         requestedEndpoint = NOW_PLAYING
         mockRequest(server) {
             movies {
-                nowPlaying(SUCCESS)
+                requestMatcher = nowPlaying(SUCCESS)
             }
         }
     }
@@ -45,16 +47,7 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         requestedEndpoint = POPULAR
         mockRequest(server) {
             movies {
-                popular(SUCCESS)
-            }
-        }
-    }
-
-    fun latest() {
-        requestedEndpoint = LATEST
-        mockRequest(server) {
-            movies {
-                latest(SUCCESS)
+                requestMatcher = popular(SUCCESS)
             }
         }
     }
@@ -63,7 +56,7 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         requestedEndpoint = TOP_RATED
         mockRequest(server) {
             movies {
-                topRated(SUCCESS)
+                requestMatcher = topRated(SUCCESS)
             }
         }
     }
@@ -72,53 +65,47 @@ class MoviesRepositoryRobot(private val server: MockWebServer) {
         requestedEndpoint = UP_COMING
         mockRequest(server) {
             movies {
-                upComing(SUCCESS)
+                requestMatcher = upComing(SUCCESS)
             }
         }
     }
 
     infix fun request(func: MoviesRepositoryResult.() -> Unit): MoviesRepositoryResult {
+        val movies: Observable<Page<Media>>
         when (requestedEndpoint) {
-            NOW_PLAYING -> MoviesRepository.nowPlaying(lang, page, region)
-            POPULAR -> MoviesRepository.popular(lang, page, region)
-            LATEST -> MoviesRepository.latest(lang).subscribe()
-            TOP_RATED -> MoviesRepository.topRated(lang, page, region)
-            UP_COMING -> MoviesRepository.upComing(lang, page, region)
+            NOW_PLAYING -> movies = MoviesRepository.nowPlaying(lang, page, region)
+            POPULAR -> movies = MoviesRepository.popular(lang, page, region)
+            TOP_RATED -> movies = MoviesRepository.topRated(lang, page, region)
+            UP_COMING -> movies = MoviesRepository.upComing(lang, page, region)
         }
-        return MoviesRepositoryResult(server).apply { func() }
+        return MoviesRepositoryResult(requestMatcher, movies).apply { func() }
     }
 
 }
 
-class MoviesRepositoryResult(private val server: MockWebServer) {
+class MoviesRepositoryResult(private val requestMatcher: RequestMatchersGroup?, private val movies: Observable<Page<Media>>) {
 
     fun nowPlayingRequested() {
-        pathIsCorrect(nowPlaying)
+        requestMatcher?.pathIs(getPath(nowPlaying))
+        movies.blockingFirst()
     }
 
     fun popularRequested() {
-        pathIsCorrect(popular)
-    }
-
-    fun latestRequested() {
-        pathIsCorrect(latest)
+        requestMatcher?.pathIs(getPath(popular))
+        movies.blockingFirst()
     }
 
     fun topRatedRequested() {
-        pathIsCorrect(topRated)
+        requestMatcher?.pathIs(getPath(topRated))
+        movies.blockingFirst()
     }
 
     fun upComingRequested() {
-        pathIsCorrect(upcoming)
+        requestMatcher?.pathIs(getPath(upcoming))
+        movies.blockingFirst()
     }
 
-    private fun pathIsCorrect(path: String) {
-        val request = server.takeRequest()
-        assertEquals(errorMessage("Path"), requestedEndpoint(request.path), "/$path")
-    }
-
-    private fun requestedEndpoint(fullPath: String): String {
-        val queryStartIndex = fullPath.indexOf("?")
-        return fullPath.substring(0, queryStartIndex)
+    private fun getPath(path: String): String {
+        return "/$path"
     }
 }

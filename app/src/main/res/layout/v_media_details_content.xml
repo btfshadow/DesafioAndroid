@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="br.com.concretesolutions.desafioandroid.ui.util.MediaUtils" />
+
+        <variable
+            name="obj"
+            type="br.com.concretesolutions.repository.model.Media" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_media_details_poster"
+            android:layout_width="96dp"
+            android:layout_height="144dp"
+            android:contentDescription="@string/cd_media_poster"
+            android:src='@{MediaUtils.getPosterUrl(obj)}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:src="@drawable/ic_image_placeholder" />
+
+        <TextView
+            android:id="@+id/txt_media_details_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:text="@{MediaUtils.getRatingText(context, obj)}"
+            app:layout_constraintBottom_toTopOf="@+id/rb_media_details_rating_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_media_details_poster"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="96dp"
+            tools:text="Ratings: 8.0" />
+
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rb_media_details_rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="@{MediaUtils.getRatingValue(obj)}"
+            android:theme="@style/Theme.Desafio.Rating"
+            app:layout_constraintBottom_toTopOf="@+id/txt_media_details_overview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_media_details_poster"
+            app:layout_constraintTop_toBottomOf="@+id/txt_media_details_rating"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <TextView
+            android:id="@+id/txt_media_details_overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/overview"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txt_media_details_overview_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_media_details_poster" />
+
+        <TextView
+            android:id="@+id/txt_media_details_overview_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{obj.overview()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_media_details_overview" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
