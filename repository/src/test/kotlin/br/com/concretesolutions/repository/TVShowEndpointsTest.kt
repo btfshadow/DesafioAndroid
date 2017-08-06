@@ -1,26 +1,25 @@
 package br.com.concretesolutions.repository
 
 import br.com.concretesolutions.repository.api.type.LanguageType
-import br.com.concretesolutions.repository.base.BaseTest
 import br.com.concretesolutions.repository.robots.tvShowEndpoints
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class TVShowEndpointsTest: BaseTest() {
+class TVShowEndpointsTest {
 
     @Test
     fun endpointShouldBeTVShow() {
-        tvShowEndpoints(server) {
+        tvShowEndpoints {
         } build {
-            endpointIs("/tv/popular")
+            endpointIs("tv")
         }
     }
 
     @Test
     fun whenQueryLanguageX_languageParamShouldBe_X() {
-        tvShowEndpoints(server) {
+        tvShowEndpoints {
             language(LanguageType.PT_BR)
         } build {
             languageIs("pt-BR")
