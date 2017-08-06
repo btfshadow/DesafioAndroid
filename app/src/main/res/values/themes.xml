@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowContentTransitions">true</item>
     </style>
 
     <style name="Theme.Desafio.MediaDetails">
@@ -16,6 +17,10 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowContentOverlay">@android:color/transparent</item>
         <item name="android:windowNoTitle">false</item>
+    </style>
+
+    <style name="Theme.Desafio.Rating" >
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

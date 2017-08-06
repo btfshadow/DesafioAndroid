@@ -29,7 +29,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/img_media_list_item_poster"
+                android:id="@+id/img_media_details_item_poster"
                 android:layout_width="128dp"
                 android:layout_height="192dp"
                 android:contentDescription="@string/cd_media_poster"
@@ -52,7 +52,7 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toTopOf="@+id/txt_media_list_item_overview"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_media_list_item_poster"
+                app:layout_constraintStart_toEndOf="@id/img_media_details_item_poster"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Pirates of Caribbean" />
 
@@ -67,7 +67,7 @@
                 android:text="@{obj.overview}"
                 app:layout_constraintBottom_toTopOf="@+id/txt_media_list_item_rating"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_media_list_item_poster"
+                app:layout_constraintStart_toEndOf="@+id/img_media_details_item_poster"
                 app:layout_constraintTop_toBottomOf="@+id/txt_media_list_item_title"
                 tools:text="Antes de ser Mulher-Maravilha, ela era Diana, princesa das Amazonas, treinada para ser uma guerreira imbatível. Criada numa ilha paraíso protegida e escondida, tudo muda quando um piloto americano chega em seu território e avisa sobre um grande conflito tomando forma no mundo. Diana deixa seu lar convencida de que pode impedir a ameaça crescente. Lutando ao lado dos homens em uma guerra para dar fim a todas as outras, Diana descobre seus poderes… e seu destino." />
 
@@ -78,7 +78,7 @@
                 android:layout_marginStart="@dimen/small_margin"
                 android:text="@{TextUtils.isEmpty(obj.rating) ? @string/media_item_no_rating : @string/media_item_rating(obj.rating, obj.rating)}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_media_list_item_poster"
+                app:layout_constraintStart_toEndOf="@+id/img_media_details_item_poster"
                 app:layout_constraintTop_toBottomOf="@+id/txt_media_list_item_overview"
                 tools:text="Ratings: 8.0" />
 

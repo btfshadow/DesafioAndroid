@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import br.com.concretesolutions.desafioandroid.R;
 import br.com.concretesolutions.desafioandroid.databinding.VMediaHorizontalItemBinding;
@@ -17,12 +19,14 @@ import br.com.concretesolutions.desafioandroid.ui.adapter.HorizontalListAdapter;
 import br.com.concretesolutions.desafioandroid.ui.decoration.CustomItemDecoration;
 import br.com.concretesolutions.desafioandroid.ui.feature.detail.MediaDetailActivity;
 import br.com.concretesolutions.desafioandroid.ui.feature.list.MediaListActivity;
-import br.com.concretesolutions.repository.model.MediaType;
+import br.com.concretesolutions.desafioandroid.ui.util.ImageUtils;
 import br.com.concretesolutions.repository.model.Media;
+import br.com.concretesolutions.repository.model.MediaType;
 import br.com.concretesolutions.repository.model.Page;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
+import static br.com.concretesolutions.desafioandroid.R.id.img_media_item_poster;
 import static br.com.concretesolutions.desafioandroid.manager.MediaTypeManager.getMediaObservable;
 
 public class MediaHorizontalListView extends FrameLayout implements HorizontalListAdapter.HorizontalListClickListener {
