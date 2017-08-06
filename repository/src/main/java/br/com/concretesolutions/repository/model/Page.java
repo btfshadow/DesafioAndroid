@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public final class Page<T> {
+public class Page<T> {
 
     @Expose private List<T> results;
     @Expose private int page;
@@ -13,12 +13,6 @@ public final class Page<T> {
     @Expose private int totalResults;
     @SerializedName("total_pages")
     @Expose private int totalPages;
-
-    public Page(List<T> list, int page, int totalPages) {
-        this.results = list;
-        this.page = page;
-        this.totalPages = totalPages;
-    }
 
     public List<T> results() {
         return results;

@@ -1,17 +1,18 @@
 package br.com.concretesolutions.repository.robots
 
-import br.com.concretesolutions.repository.api.MediaApi
+import br.com.concretesolutions.repository.api.MoviesApi
 import br.com.concretesolutions.repository.api.type.LanguageType
-import br.com.concretesolutions.repository.mock.RequestMock
-import br.com.concretesolutions.repository.mock.mockRequest
-import br.com.concretesolutions.repository.model.Media
 import br.com.concretesolutions.repository.model.Page
-import br.com.concretesolutions.requestmatcher.RequestMatcherRule
-import io.reactivex.Observable
+import br.com.concretesolutions.repository.model.TVShow
+import br.com.concretesolutions.repository.utils.errorMessage
+import br.com.concretesolutions.repository.utils.languageParam
+import br.com.concretesolutions.repository.utils.requestEndpoint
+import org.junit.Assert.assertEquals
+import retrofit2.Call
 
-fun tvShowEndpoints(server: RequestMatcherRule, func: TVShowEndpointsRobot.() -> Unit) = TVShowEndpointsRobot(server).apply { func() }
+fun tvShowEndpoints(func: TVShowEndpointsRobot.() -> Unit) = TVShowEndpointsRobot().apply { func() }
 
-class TVShowEndpointsRobot(private val server: RequestMatcherRule) {
+class TVShowEndpointsRobot {
     private var page: Int = 0
     @LanguageType private var lang = LanguageType.PT_BR
 
@@ -21,32 +22,18 @@ class TVShowEndpointsRobot(private val server: RequestMatcherRule) {
     }
 
     infix fun build(func: TVShowEndpointsResult.() -> Unit): TVShowEndpointsResult {
-        val tvShows = MediaApi.get().getPopularTVShows(lang, page)
-        return TVShowEndpointsResult(server, tvShows).apply { func() }
+        val tvShows = MoviesApi.get().getPopularTVShows(lang, page)
+        return TVShowEndpointsResult(tvShows).apply { func() }
     }
 }
 
-class TVShowEndpointsResult(private val server: RequestMatcherRule, private val tvShows: Observable<Page<Media>>) {
+class TVShowEndpointsResult(private val tvShows: Call<Page<TVShow>>) {
 
     fun endpointIs(endpoint: String) {
-        mockRequest(server)
-        {
-            movies {
-                popular(RequestMock.Code.SUCCESS)
-                        .pathIs(endpoint)
-            }
-        }
-        tvShows.blockingFirst()
+        assertEquals(errorMessage("Endpoint"), requestEndpoint(tvShows.request()), endpoint)
     }
 
     fun languageIs(language: String) {
-        mockRequest(server)
-        {
-            movies {
-                popular(RequestMock.Code.SUCCESS)
-                        .queriesContain("language", language)
-            }
-        }
-        tvShows.blockingFirst()
+        assertEquals(errorMessage("Language"), languageParam(tvShows.request()), language)
     }
 }

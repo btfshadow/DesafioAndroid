@@ -14,18 +14,15 @@ android {
 
     def baseUrl = '"https://api.themoviedb.org/3/"'
     def apiKey = '"1cef6bd1d5e66557f3e1156e8f42109b"'
-    def baseImageUrl = '"https://image.tmdb.org/t/p/w500"'
 
     buildTypes {
         debug {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
-            buildConfigField 'String', 'BASE_IMAGE_URL', baseImageUrl
         }
         release {
             buildConfigField 'String', 'BASE_URL', baseUrl
             buildConfigField 'String', 'API_KEY', apiKey
-            buildConfigField 'String', 'BASE_IMAGE_URL', baseImageUrl
         }
     }
 
@@ -68,8 +65,6 @@ dependencies {
     compile "com.jakewharton.timber:timber:$versions.timber"
 
     testCompile 'junit:junit:4.12'
-    testCompile "br.com.concretesolutions:requestmatcher:$versions.requestMatcher"
-    testCompile "org.hamcrest:hamcrest-all:$versions.hamcrest"
     testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
     testCompile "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
