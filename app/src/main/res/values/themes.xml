@@ -18,4 +18,8 @@
         <item name="android:windowNoTitle">false</item>
     </style>
 
+    <style name="Theme.Desafio.Rating" >
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>

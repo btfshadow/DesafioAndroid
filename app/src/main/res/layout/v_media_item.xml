@@ -25,6 +25,7 @@
             android:layout_height="192dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/cd_media_poster"
+            android:transitionName="poster"
             android:src='@{TextUtils.isEmpty(obj.poster) ? "" : BuildConfig.BASE_IMAGE_URL + obj.poster}'
             tools:src="@drawable/ic_image_placeholder"/>
 

@@ -55,6 +55,7 @@ public class MediaListActivity extends BaseActivity {
     private void setupToolbar(final MediaType mediaType) {
         String title = getTextForMedia(this, mediaType);
         binding.toolbar.setTitle(title);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupAdapter(final MediaType mediaType) {

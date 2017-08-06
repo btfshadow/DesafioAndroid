@@ -14,6 +14,7 @@ import br.com.concretesolutions.repository.model.Media;
 
 public class MediaDetailActivity extends BaseActivity {
 
+    public static final String EXTRA_POSTER = "EXTRA_POSTER";
     private static final String KEY_MEDIA_ITEM = "KEY_MEDIA_ITEM";
     private AMediaDetailBinding binding;
 
@@ -30,6 +31,7 @@ public class MediaDetailActivity extends BaseActivity {
         setStatusBarPadding(binding.appBarLayout);
         final Media item = getIntent().getParcelableExtra(KEY_MEDIA_ITEM);
         binding.setObj(item);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     protected void setStatusBarPadding(View view) {
