@@ -20,13 +20,13 @@ import br.com.concretesolutions.repository.model.MediaType;
 public class MediaFragment extends BaseFragment {
 
     private static final String STATE_ADAPTER = "STATE_ADAPTER_0";
-    private static final String VIEW_MODEL_LIST_KEY = "VIEW_MODEL_LIST_KEY";
+    private static final String MEDIA_TYPE_LIST = "MEDIA_TYPE_LIST";
     private FMediaBinding binding;
     private BaseAdapter<MediaType> adapter;
 
-    public static MediaFragment newInstance(@NonNull final ArrayList<MediaType> viewModelList) {
+    public static MediaFragment newInstance(@NonNull final ArrayList<MediaType> mediaTypeList) {
         Bundle args = new Bundle();
-        args.putParcelableArrayList(VIEW_MODEL_LIST_KEY, viewModelList);
+        args.putParcelableArrayList(MEDIA_TYPE_LIST, mediaTypeList);
         MediaFragment fragment = new MediaFragment();
         fragment.setArguments(args);
         return fragment;
@@ -46,10 +46,10 @@ public class MediaFragment extends BaseFragment {
         adapter = new BaseAdapter<>(R.layout.v_category_item);
         if (savedInstanceState != null)
             adapter.restoreInstanceState(savedInstanceState.getBundle(STATE_ADAPTER));
-        final ArrayList<MediaType> viewModelList = getArguments().getParcelableArrayList(VIEW_MODEL_LIST_KEY);
-        if (viewModelList != null)
+        final ArrayList<MediaType> mediaTypeList = getArguments().getParcelableArrayList(MEDIA_TYPE_LIST);
+        if (mediaTypeList != null)
             //noinspection unchecked
-            adapter.setList(viewModelList);
+            adapter.setList(mediaTypeList);
     }
 
     private void setupRecyclerView() {

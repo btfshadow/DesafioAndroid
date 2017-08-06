@@ -40,12 +40,12 @@ public final class PicassoBindingAdapter {
                 .into(view, new Callback() {
             @Override
             public void onSuccess() {
-
             }
 
             @Override
             public void onError() {
                 view.setImageResource(R.drawable.ic_refresh);
+                view.setOnClickListener(v -> loadIntoImageView((ImageView) v, url, transform));
             }
         });
     }
